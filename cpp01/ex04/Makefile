@@ -1,11 +1,11 @@
 .DEFAULT_GOAL	=	all
 
 # PROGRAM NAME
-NAME			=	file_converter
+NAME			=	fileConverter
 
 # FLAGS
 CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror  -std=c++98
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98
 CFLAGS_SANITIZE	=	-fsanitize=address -g3
 CPPFLAGS		=	-I.
 LDFLAGS			=	

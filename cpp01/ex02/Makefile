@@ -1,7 +1,7 @@
 .DEFAULT_GOAL	=	all
 
 # PROGRAM NAME
-NAME			=	zombie
+NAME			=	ptrVsRef
 
 # FLAGS
 CC				=	c++
