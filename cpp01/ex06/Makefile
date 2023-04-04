@@ -1,11 +1,11 @@
 .DEFAULT_GOAL	=	all
 
 # PROGRAM NAME
-NAME			=	zombie
+NAME			=	harlFilter
 
 # FLAGS
 CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98
 CFLAGS_SANITIZE	=	-fsanitize=address -g3
 CPPFLAGS		=	-I.
 LDFLAGS			=	
@@ -15,8 +15,9 @@ CFLAGS			+=	$(CFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS			=	
-OBJS			=	$(SRCS:.c=.o)
+SRCS			=	main.cpp \
+					Harl.cpp
+OBJS			=	$(SRCS:.cpp=.o)
 
 # BUILD RULES
 $(NAME): $(OBJS)
