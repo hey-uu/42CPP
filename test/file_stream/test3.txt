@@ -1,0 +1,3 @@
+adfhi
+I am studying File Stream of C++
+This is so much fun!
