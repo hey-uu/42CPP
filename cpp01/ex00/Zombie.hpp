@@ -9,10 +9,11 @@ private:
 	std::string	name;
 
 public:
-	Zombie();
+	Zombie(void);
 	Zombie(std::string);
-	~Zombie();
-	void	announce(void) const;
+	~Zombie(void);
+	// void	announce(void) const;
+	void	announce(void);
 };
 
 Zombie	*newZombie(std::string name);

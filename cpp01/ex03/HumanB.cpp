@@ -1,13 +1,13 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : name(name)
+HumanB::HumanB(std::string name) : name(name), _hasWeapon(false)
 {
-	std::cout << "[Weapon] Strings constructor called: " << *this << "\n";
+	std::cerr << "[HumanB] String constructor called  : " << *this << "\n";
 }
 
 HumanB::~HumanB(void)
 {
-	std::cout << "[Weapon] Default destructor called: " << *this << "\n";
+	std::cerr << "[HumanB] Default destructor called  : " << *this << "\n";
 }
 
 void	HumanB::attack(void) const
@@ -17,21 +17,30 @@ void	HumanB::attack(void) const
 
 void	HumanB::setWeapon(Weapon &weapon)
 {
+	_hasWeapon = true;
 	this->weapon = &weapon;
 }
 
-const std::string	&HumanB::getName(void) const
+std::string const	&HumanB::getName(void) const
 {
 	return (name);
 }
 
-const Weapon	&HumanB::getWeapon(void) const
+bool const	HumanB::hasWeapon(void) const
+{
+	return (_hasWeapon);
+}
+
+Weapon const	&HumanB::getWeapon(void) const
 {
 	return (*weapon);
 }
 
 std::ostream	&operator<<(std::ostream &outputStream, HumanB const &human)
 {
-	std::cout << "( " << human.getName() << ", " << human.getWeapon() << " )";
+	if (human.hasWeapon())
+		outputStream << "( " << human.getName() << ", " << human.getWeapon() << " )";
+	else
+		outputStream << "( " << human.getName() << ", )";
 	return (outputStream);
 }

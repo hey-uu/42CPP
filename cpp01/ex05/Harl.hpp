@@ -23,8 +23,8 @@ private:
 	void	extra(void);
 	void	setLevelIdx(std::string const &level);
 public:
-	Harl();
-	~Harl();
+	Harl(void);
+	~Harl(void);
 	void	complain(std::string level);
 };
 

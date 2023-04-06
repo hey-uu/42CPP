@@ -2,8 +2,7 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-	{
+	if (argc != 2) {
 		std::cerr << "[ ERROR ] Arguments must be './<program_name> <log_level>'\n";
 		return (1);
 	}

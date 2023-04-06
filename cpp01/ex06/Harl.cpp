@@ -2,12 +2,12 @@
 
 Harl::Harl(void)
 { 
-	std::cout << "[ Harl ] Constructor called\n\n";
+	std::cerr << "[ Harl ] Constructor called\n\n";
 }
 
 Harl::~Harl(void)
 {
-	std::cout << "[ Harl ] Destructor called\n\n";
+	std::cerr << "[ Harl ] Destructor called\n\n";
 }
 
 void	Harl::debug(void)
@@ -48,16 +48,13 @@ void	Harl::extra(void)
 void	Harl::setLevelIdx(std::string const &level)
 {
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	int			i = 0;
 
-	for (int i = 0; i < 4; i++)
-	{
-		if (levels[i] == level) 
-		{
-			levelIdx = i;
-			return ;
-		}
+	while (i < 4) {
+		if (levels[i] == level) break ;
+		i++;
 	}
-	levelIdx = 4;
+	levelIdx = i;
 }
 
 void	Harl::complain(std::string level)

@@ -37,7 +37,6 @@ void	FileConverter::convertSubstr(void)
 		copySame();
 		return ;
 	}
-
 	std::stringstream	buf;
 	std::string			content, newContent;
 	size_t				startPos, foundPos;

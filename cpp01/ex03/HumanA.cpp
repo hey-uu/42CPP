@@ -3,12 +3,12 @@
 HumanA::HumanA(std::string const &name, Weapon &weapon) 
 		: name(name), weapon(weapon)
 {
-	std::cout << "[HumanA] Complex constructor called: " << *this << "\n";
+	std::cerr << "[HumanA] Complex constructor called : " << *this << "\n";
 }
 
 HumanA::~HumanA(void)
 {
-	std::cout << "[HumanA] Default destructor called: " << *this << "\n";
+	std::cerr << "[HumanA] Default destructor called  : " << *this << "\n";
 }
 
 void	HumanA::attack(void) const
@@ -16,23 +16,28 @@ void	HumanA::attack(void) const
 	std::cout << name << " attacks with their " << weapon <<"\n";
 }
 
+bool const	HumanA::hasWeapon(void) const
+{
+	return (true);
+}
+
 void	HumanA::setWeapon(Weapon const &weapon)
 {
 	this->weapon = weapon;
 }
 
-const std::string	&HumanA::getName(void) const
+std::string const	&HumanA::getName(void) const
 {
 	return (name);
 }
 
-const Weapon	&HumanA::getWeapon(void) const
+Weapon const	&HumanA::getWeapon(void) const
 {
 	return (weapon);
 }
 
 std::ostream	&operator<<(std::ostream &outputStream, HumanA const &human)
 {
-	std::cout << "( " << human.getName() << ", " << human.getWeapon() << " )";
+	outputStream << "( " << human.getName() << ", " << human.getWeapon() << " )";
 	return (outputStream);
 }

@@ -13,9 +13,10 @@ public:
 	HumanA(std::string const &name, Weapon &weapon);
 	~HumanA(void);
 	void				attack(void) const;
+	bool const			hasWeapon(void) const;
 	void				setWeapon(Weapon const &weapon);
-	const std::string	&getName(void) const;
-	const Weapon		&getWeapon(void) const;
+	std::string const	&getName(void) const;
+	Weapon const		&getWeapon(void) const;
 };
 
 std::ostream	&operator<<(std::ostream &outputStream, HumanA const &human);

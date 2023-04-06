@@ -4,19 +4,16 @@
 
 int	main(int argc, char **argv)
 {
-	try
-	{
+	try {
 		if (argc != 4)
 			throw (ERRMSG_WRONG_ARGS);
 		FileConverter	converter(argv[1], argv[2], argv[3]);
 		converter.convertSubstr();
 	}
-	catch (char const *errMsg)
-	{
+	catch (char const *errMsg) {
 		std::cerr << errMsg << "\n";
 	}
-	catch (std::string const errMsg)
-	{
+	catch (std::string const errMsg) {
 		std::cerr << errMsg << "\n";
 	}
 }
