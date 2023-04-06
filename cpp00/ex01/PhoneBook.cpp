@@ -19,6 +19,44 @@ bool	PhoneBook::add(void)
 	return (true);
 }
 
+bool	PhoneBook::search(void) const
+{
+	int	idx;
+
+	showSummary();
+	while (1) {
+		std::cout << " * Enter index of the entry to display.\n";
+		std::cout << "   Enter -1 if you want to stop.         : " << std::flush;
+		idx = 0;
+		std::cin >> idx;
+		if (std::cin.eof() == true)
+			throw (std::exception());
+		if (std::cin.fail() == true)
+			printErr(WRONG_VALUE);
+		else if (idx < -1 || idx >= count)
+			printErr(OUT_OF_RANGE);
+		else if (idx == -1)
+			return (true);
+		else
+			break ;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+	contacts[idx].showInfo();
+	return (true);
+}
+
+void	PhoneBook::printErr(int errCode) const
+{
+	const std::string	errMsg[] = {
+		[WRONG_VALUE] = ERRMSG_WRONG_VALUE,
+		[OUT_OF_RANGE] = ERRMSG_OUT_OF_RANGE,
+		[UNAVAILABLE_CMD] = ERRMSG_UNAVAILABLE_CMD
+	};
+
+	std::cerr << "\n " << errMsg[errCode] << std::endl;
+}
+
 void	PhoneBook::showSummary(void) const
 {
 	std::cout << "\n";
@@ -35,28 +73,4 @@ void	PhoneBook::showSummary(void) const
 			std::cout << "         |----------+----------+----------+----------|\n";
 	}
 	std::cout << "         +-------------------------------------------+\n" << std::endl;
-}
-
-bool	PhoneBook::search(void) const
-{
-	int	idx;
-
-	showSummary();
-	while (1) {
-		std::cout << " * Enter index of the entry to display.\n";
-		std::cout << "   Enter -1 if you want to stop         : " << std::flush;
-		std::cin >> idx;
-		if (std::cin.eof() == true) return (false);
-		if (std::cin.fail() == true) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "\n [ERROR] : Index has wrong value\n";
-		}
-		else if (idx < -1 || idx >= count)
-			std::cout << "\n [ERROR] : Index is out of range\n";
-		else if (idx == -1) return (true);
-		else break ;
-	}
-	contacts[idx].showInfo();
-	return (true);
 }

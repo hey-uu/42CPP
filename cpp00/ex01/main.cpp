@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+
 void	showMenu(void)
 {
 	if (std::cin.eof() == true)
@@ -33,21 +34,23 @@ int	main(void)
 	PhoneBook	phoneBook;
 	std::string	command;
 
-	while (1)
-	{
-		showMenu();
-		std::cin >> command;
-		if (std::cin.eof() == true || command == "EXIT")
-			exitService();
-		if (command == "ADD") { 
-			if (phoneBook.add() == false)
+	try {
+		while (1) {
+			showMenu();
+			std::getline(std::cin, command);
+			if (std::cin.eof() == true)
+				throw (std::exception());
+			if (command == "EXIT")
 				exitService();
+			if (command == "ADD")
+				phoneBook.add();
+			if (command == "SEARCH")
+				phoneBook.search();
+			else
+				phoneBook.printErr(UNAVAILABLE_CMD);
 		}
-		else if (command == "SEARCH") {
-			if (phoneBook.search() == false)
-				exitService();
-		}
-		else
-			std::cout << "\n [ERR0R] : Unavailable command. Enter again." << std::endl;
+	}
+	catch (std::exception &e) {
+		exitService();
 	}
 }

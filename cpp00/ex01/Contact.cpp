@@ -10,8 +10,7 @@ void	Contact::initialize(std::string contactInfo[5])
 	nickname = contactInfo[2];
 	phoneNumber = contactInfo[3];
 	darkestSecret = contactInfo[4];
-	for (int i = 0 ; i < 4 ; i++)
-	{
+	for (int i = 0 ; i < 4 ; i++) {
 		if (contactInfo[i].length() >= 10)
 			summaryInfo[i] = contactInfo[i].substr(0, 10).replace(9, 1, ".");
 		else
@@ -35,8 +34,7 @@ void	Contact::showInfo() const
 void	Contact::showSummary() const
 {
 	std::cout << "|";
-	for (int i = 0 ; i < 4 ; i++)
-	{
+	for (int i = 0 ; i < 4 ; i++) {
 		std::cout << std::setw(10) << std::right << summaryInfo[i];
 		std::cout << "|";
 	}
@@ -50,8 +48,7 @@ bool	Contact::getContactInput(std::string contactInfo[5])
 	};
 
 	std::cout << "\n * Enter Information for new contact.\n";
-	for (int i = 0 ; i < 5 ; i++)
-	{
+	for (int i = 0 ; i < 5 ; i++) {
 		std::cout << "   >> " << message[i] << " : " << std::flush;
 		std::cin >> contactInfo[i];
 		if (std::cin.eof() == true)
