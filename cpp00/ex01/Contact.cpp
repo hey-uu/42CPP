@@ -1,9 +1,10 @@
-#include "Contact.hpp"
+#include "stream_utils.hpp"
+#include "PhoneBook.hpp"
 
-Contact::Contact(void)
+phonebook::Contact::Contact(void)
 { }
 
-void	Contact::initialize(std::string contactInfo[5])
+void	phonebook::Contact::initialize(std::string contactInfo[5])
 {
 	firstName = contactInfo[0];
 	lastName = contactInfo[1];
@@ -18,41 +19,35 @@ void	Contact::initialize(std::string contactInfo[5])
 	}
 }
 
-void	Contact::showInfo() const
+void	phonebook::Contact::showInfo() const
 {
-	std::cout << "\n";
-	std::cout << "==============================================================\n";
-	std::cout << "                     Specific Information                     \n";
-	std::cout << "==============================================================\n";
-	std::cout << " + First Name : " << firstName << "\n";
-	std::cout << " + Last Name : " << lastName << "\n";
-	std::cout << " + Nickname : " << nickname << "\n";
-	std::cout << " + Phone Number : " << phoneNumber << "\n";
-	std::cout << " + Darkest Secret : " << darkestSecret << "\n" << std::endl;
+	std::cout << banner::specfic_info;
+	std::cout << prompt::type3 << info_type::first_name << firstName << "\n";
+	std::cout << prompt::type3 << info_type::last_name << lastName << "\n";
+	std::cout << prompt::type3 << info_type::nickname << nickname << "\n";
+	std::cout << prompt::type3 << info_type::phone_number << phoneNumber << "\n";
+	std::cout << prompt::type3 << info_type::darkest_secret << darkestSecret << "\n";
+	std::cout << line::double_solid;
+	std::cout << std::endl;
 }
 
-void	Contact::showSummary() const
+void	phonebook::Contact::showSummary() const
 {
-	std::cout << "|";
+	std::cout << info_table::separator;
 	for (int i = 0 ; i < 4 ; i++) {
 		std::cout << std::setw(10) << std::right << summaryInfo[i];
-		std::cout << "|";
+		std::cout << info_table::separator;
 	}
 	std::cout << std::endl;
 }
 
-bool	Contact::getContactInput(std::string contactInfo[5])
+bool	phonebook::Contact::getContactInput(std::string contactInfo[5])
 {
-	std::string	message[5] = {
-		"First Name", "Last Name", "Nickname", "Phone Number", "Darkest Secret"
-	};
-
-	std::cout << "\n * Enter Information for new contact.\n";
+	std::cout << "\n" << instruct::get_contact_info;
 	for (int i = 0 ; i < 5 ; i++) {
-		std::cout << "   >> " << message[i] << " : " << std::flush;
-		std::cin >> contactInfo[i];
-		if (std::cin.eof() == true)
-			return (false);
+		std::cout << prompt::type2 << info_type::all[i] << std::flush;
+		std::getline(std::cin, contactInfo[i]);
+		checkEOF(std::cin);
 	}
 	return (true);
 }

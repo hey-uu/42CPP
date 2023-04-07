@@ -1,76 +1,80 @@
+#include "stream_utils.hpp"
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook(void)
+/** PUBLIC **/
+phonebook::PhoneBook::PhoneBook(void)
 {
 	lastIdx = -1;
 	count = 0;
 }
 
-bool	PhoneBook::add(void)
+void	phonebook::PhoneBook::showMenu(void) const
+{
+	std::cout << banner::start;
+	std::cout << instruct::get_command;
+	std::cout << prompt::type1 << std::flush;
+}
+
+void	phonebook::PhoneBook::terminate(void) const
+{
+	std::cout << banner::terminate;
+	std::cout << instruct::terminate << std::endl;
+	exit(0);
+}
+
+void	phonebook::PhoneBook::add(void)
 {
 	std::string	contactInfo[5];
 
-	if (Contact::getContactInput(contactInfo) == false)
-		return (false);
+	Contact::getContactInput(contactInfo);
 	lastIdx = (lastIdx + 1) & 7;
 	contacts[lastIdx].initialize(contactInfo);
 	if (count < 8)
 		count++;
-	return (true);
 }
 
-bool	PhoneBook::search(void) const
+void	phonebook::PhoneBook::search(void) const
 {
 	int	idx;
 
 	showSummary();
 	while (1) {
-		std::cout << " * Enter index of the entry to display.\n";
-		std::cout << "   Enter -1 if you want to stop.         : " << std::flush;
-		idx = 0;
+		std::cout << instruct::search << std::flush;
 		std::cin >> idx;
-		if (std::cin.eof() == true)
-			throw (std::exception());
+		checkEOF(std::cin);
 		if (std::cin.fail() == true)
-			printErr(WRONG_VALUE);
+			_printErr(err::kNotNumber);
 		else if (idx < -1 || idx >= count)
-			printErr(OUT_OF_RANGE);
-		else if (idx == -1)
-			return (true);
+			_printErr(err::kOutOfRange);
 		else
 			break ;
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		inBuffClear(std::cin);
 	}
+	inBuffClear(std::cin);
+	if (idx == -1)
+		return ;
 	contacts[idx].showInfo();
-	return (true);
 }
 
-void	PhoneBook::printErr(int errCode) const
+void	phonebook::PhoneBook::extra(void) const
 {
-	const std::string	errMsg[] = {
-		[WRONG_VALUE] = ERRMSG_WRONG_VALUE,
-		[OUT_OF_RANGE] = ERRMSG_OUT_OF_RANGE,
-		[UNAVAILABLE_CMD] = ERRMSG_UNAVAILABLE_CMD
-	};
-
-	std::cerr << "\n " << errMsg[errCode] << std::endl;
+	_printErr(err::kUnavailableCmd);
 }
 
-void	PhoneBook::showSummary(void) const
+void	phonebook::PhoneBook::showSummary(void) const
 {
-	std::cout << "\n";
-	std::cout << "==============================================================\n";
-	std::cout << "                    Phone Book Information                    \n";
-	std::cout << "==============================================================\n";
-	std::cout << "         +-------------------------------------------+\n";
-	std::cout << "         |  index   |first name|last name | nickname |\n";
-	std::cout << "         |----------+----------+----------+----------|\n";
+	std::cout << banner::info << info_table::top;
 	for (int i = 0 ; i < count ; i++) {
-		std::cout << "         ";
+		std::cout << info_table::left_indent;
 		contacts[i].showSummary();
 		if (i != count - 1)
-			std::cout << "         |----------+----------+----------+----------|\n";
+			std::cout << info_table::middle_line;
 	}
-	std::cout << "         +-------------------------------------------+\n" << std::endl;
+	std::cout << info_table::end_line << std::endl;
+}
+
+/** PRIVATE **/
+void	phonebook::PhoneBook::_printErr(int errCode) const
+{
+	std::cerr << err::message[errCode] << std::endl << std::endl;
 }

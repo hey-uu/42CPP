@@ -13,7 +13,7 @@ CFLAGS			+=	$(CFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS			=	PhoneBook.cpp main.cpp Contact.cpp
+SRCS			=	PhoneBook.cpp main.cpp Contact.cpp stream_utils.cpp
 OBJS			=	$(SRCS:.cpp=.o)
 
 # BUILD
