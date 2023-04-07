@@ -17,13 +17,12 @@ namespace	phonebook
 		std::string	darkestSecret;
 		std::string	summaryInfo[4];
 	public:
-		Contact(void);
+					Contact(void);
 		void		initialize(std::string contactInfo[5]);
 		static bool	getContactInput(std::string contactInfo[5]);
 		void		showSummary(void) const ;
 		void		showInfo(void) const;
 	};
 }
-
 
 #endif
