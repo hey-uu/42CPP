@@ -19,8 +19,8 @@ enum ePhoneBookErrCode
     kUnavailableCmd
 };
 
-const std::string kMessage[3] = {"\n [ERROR] : Index has wrong value", "\n [ERROR] : Index is out of range",
-                                 "\n [ERR0R] : Unavailable command. Enter again."};
+const std::string kMessage[3] = {"\n [ ERROR ] : Index has wrong value", "\n [ ERROR ] : Index is out of range",
+                                 "\n [ ERR0R ] : Unavailable command. Enter again."};
 } // namespace err
 
 namespace prompt
@@ -38,7 +38,7 @@ const std::string kGetCommand = " * Please choose a command from the following o
                                 "   (ADD, SEARCH, EXIT)\n";
 const std::string kExit = " * Thanks for using our service.\n";
 const std::string kGetContactInfo = " * Enter Information for new contact.\n";
-const std::string kEOFDetected = "\n\n [EOF] The program detected the end of the file.\n";
+const std::string kEOFDetected = "\n\n [ EOF ] : The program detected the end of the file.\n";
 } // namespace instruct
 
 namespace banner
