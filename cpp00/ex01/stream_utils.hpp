@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-namespace utils {
+namespace utils
+{
 void checkEOF(std::ios &stream);
 } // namespace utils
 

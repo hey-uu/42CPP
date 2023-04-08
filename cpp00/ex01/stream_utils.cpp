@@ -2,7 +2,8 @@
 #include <iostream>
 #include <limits>
 
-void utils::checkEOF(std::ios &stream) {
-  if (stream.eof() == true)
-    throw(std::exception());
+void utils::checkEOF(std::ios &stream)
+{
+    if (stream.eof() == true)
+        throw(std::exception());
 }
