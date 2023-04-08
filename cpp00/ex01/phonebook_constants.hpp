@@ -13,7 +13,7 @@ enum ePhoneBookErrCode { kNotNumber, kOutOfRange, kUnavailableCmd };
 
 const std::string message[3] = {
     "\n [ERROR] : Index has wrong value",
-    "\n [ERROR] : Index is out of range",
+	"\n [ERROR] : Index is out of range",
     "\n [ERR0R] : Unavailable command. Enter again."};
 }  // namespace err
 

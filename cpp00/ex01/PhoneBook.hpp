@@ -11,9 +11,9 @@
 namespace phonebook {
 class PhoneBook {
  private:
-  Contact contacts[8];
-  int lastIdx;
-  int count;
+  Contact _contacts[8];
+  int _lastIdx;
+  int _count;
   void _printErr(int errCode) const;
 
  public:

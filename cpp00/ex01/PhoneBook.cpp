@@ -3,11 +3,7 @@
 #include "stream_utils.hpp"
 
 /** PUBLIC **/
-phonebook::PhoneBook::PhoneBook(void) : lastIdx(-1)
-{
-  lastIdx = -1;
-  count = 0;
-}
+phonebook::PhoneBook::PhoneBook(void) : _lastIdx(-1), _count(0) {}
 
 void phonebook::PhoneBook::showMenu(void) const {
   std::cout << banner::start;
@@ -25,9 +21,9 @@ void phonebook::PhoneBook::add(void) {
   std::string contactInfo[5];
 
   Contact::getContactInput(contactInfo);
-  lastIdx = (lastIdx + 1) & 7;
-  contacts[lastIdx].initialize(contactInfo);
-  if (count < 8) count++;
+  _lastIdx = (_lastIdx + 1) & 7;
+  _contacts[_lastIdx].initialize(contactInfo);
+  if (_count < 8) _count++;
 }
 
 void phonebook::PhoneBook::search(void) const {
@@ -40,7 +36,7 @@ void phonebook::PhoneBook::search(void) const {
     checkEOF(std::cin);
     if (std::cin.fail() == true)
       _printErr(err::kNotNumber);
-    else if (idx < -1 || idx >= count)
+    else if (idx < -1 || idx >= _count)
       _printErr(err::kOutOfRange);
     else
       break;
@@ -48,7 +44,7 @@ void phonebook::PhoneBook::search(void) const {
   }
   inBuffClear(std::cin);
   if (idx == -1) return;
-  contacts[idx].showInfo();
+  _contacts[idx].showInfo();
 }
 
 void phonebook::PhoneBook::extra(void) const {
@@ -57,10 +53,10 @@ void phonebook::PhoneBook::extra(void) const {
 
 void phonebook::PhoneBook::showSummary(void) const {
   std::cout << banner::info << info_table::top;
-  for (int i = 0; i < count; i++) {
+  for (int i = 0; i < _count; i++) {
     std::cout << info_table::left_indent;
-    contacts[i].showSummary();
-    if (i != count - 1) std::cout << info_table::middle_line;
+    _contacts[i].showSummary();
+    if (i != _count - 1) std::cout << info_table::middle_line;
   }
   std::cout << info_table::end_line << std::endl;
 }

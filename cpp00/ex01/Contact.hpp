@@ -8,12 +8,12 @@
 namespace phonebook {
 class Contact {
  private:
-  std::string firstName;
-  std::string lastName;
-  std::string nickname;
-  std::string phoneNumber;
-  std::string darkestSecret;
-  std::string summaryInfo[4];
+  std::string _firstName;
+  std::string _lastName;
+  std::string _nickname;
+  std::string _phoneNumber;
+  std::string _darkestSecret;
+  std::string _summaryInfo[4];
 
  public:
   Contact(void);
