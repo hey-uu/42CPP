@@ -24,7 +24,7 @@ all:
 	make $(NAME)
 bonus:
 	make $(NAME)
-clean:s
+clean:
 	$(RM) $(OBJS)
 fclean: clean
 	$(RM) $(NAME)

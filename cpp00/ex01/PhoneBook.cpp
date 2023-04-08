@@ -53,8 +53,9 @@ void phonebook::PhoneBook::add(void)
 
 void phonebook::PhoneBook::search(void) const
 {
-    int idx;
+    std::stringstream sStream;
     std::string sIdx;
+    int idx;
 
     showSummary();
     while (1)
@@ -62,7 +63,7 @@ void phonebook::PhoneBook::search(void) const
         std::cout << instruct::kSearch << std::flush;
         std::getline(std::cin, sIdx);
         utils::checkEOF(std::cin);
-        std::stringstream sStream(sIdx);
+        sStream.str(sIdx);
         sStream >> idx;
         if (sStream.fail() == true || sStream.eof() == false)
             _printErr(err::kNotNumber);
