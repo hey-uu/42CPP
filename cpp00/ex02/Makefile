@@ -4,12 +4,12 @@
 NAME			=	bank
 
 # COMPILE FLAGS
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror -std=c++98
-CFLAGS_SANITIZE	=	-fsanitize=address -g3
-CPPFLAGS		=	-I.
+CXX					=	c++
+CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS_SANITIZE	=	-fsanitize=address -g3
+CPPFLAGS			=	-I.
 ifdef SANITIZE
-CFLAGS			+=	$(CFLAGS_SANITIZE)
+CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
@@ -18,7 +18,7 @@ OBJS			=	$(SRCS:.cpp=.o)
 
 # BUILD
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
 
 # RULES
 all:

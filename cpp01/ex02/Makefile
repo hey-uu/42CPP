@@ -4,14 +4,14 @@
 NAME			=	ptrVsRef
 
 # FLAGS
-CC				=	c++
-CFLAGS			=	-Wall -Wextra -Werror -std=c++98
-CFLAGS_SANITIZE	=	-fsanitize=address -g3
-CPPFLAGS		=	-I.
-LDFLAGS			=	
-LDLIBS			=	
+CXX					=	c++
+CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS_SANITIZE	=	-fsanitize=address -g3
+CPPFLAGS			=	-I.
+LDFLAGS				=	
+LDLIBS				=	
 ifdef SANITIZE
-CFLAGS			+=	$(CFLAGS_SANITIZE)
+CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
@@ -20,7 +20,7 @@ OBJS			=	$(SRCS:.cpp=.o)
 
 # BUILD RULES
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDLIBS) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@ $(LDLIBS) $(LDFLAGS)
 
 # BASIC RULES
 all:
