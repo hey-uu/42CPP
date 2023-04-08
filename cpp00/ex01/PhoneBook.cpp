@@ -65,12 +65,14 @@ void phonebook::PhoneBook::search(void) const
         utils::checkEOF(std::cin);
         sStream.str(sIdx);
         sStream >> idx;
+std::cout << "idx : " << idx << std::endl;
         if (sStream.fail() == true || sStream.eof() == false)
             _printErr(err::kNotNumber);
         else if (idx < -1 || idx >= _count)
             _printErr(err::kOutOfRange);
         else
             break;
+        sStream.clear();
     }
     if (idx == -1)
         return;
