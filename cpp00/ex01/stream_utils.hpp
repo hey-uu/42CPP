@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-void inBuffClear(std::istream &inStream);
+namespace utils {
 void checkEOF(std::ios &stream);
+} // namespace utils
 
 #endif
