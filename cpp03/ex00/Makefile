@@ -1,10 +1,10 @@
-.DEFAULT_GOAL	=	all
+.DEFAULT_GOAL		=	all
 
 # PROGRAM NAME
-NAME			=	fixedPoint
+NAME				=	ClapTrap
 
 # COMPILE FLAGS
-CXX				=	c++
+CXX					=	c++
 CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
 CXXFLAGS_SANITIZE	=	-fsanitize=address -g3
 ifdef SANITIZE
@@ -12,8 +12,8 @@ CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS			=	main.cpp
-OBJS			=	$(SRCS:.cpp=.o)
+SRCS				=	main.cpp ClapTrap.cpp
+OBJS				=	$(SRCS:.cpp=.o)
 
 # BUILD
 $(NAME): $(OBJS)
