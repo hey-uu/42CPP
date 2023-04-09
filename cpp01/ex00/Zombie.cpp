@@ -1,23 +1,17 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie(void)
-{ 
-	std::cerr << "Default constructor called\n";
+Zombie::Zombie(void) {
+  std::clog << "[ DEBUG ] Default constructor called\n";
 }
 
-Zombie::Zombie(std::string name)
-{
-	this->name = name;
-	std::cerr << "String constructor called: " << name << "\n";
+Zombie::Zombie(std::string name) : name(name) {
+  std::clog << "[ DEBUG ] " << name << ": String constructor called\n";
 }
 
-Zombie::~Zombie(void)
-{
-	std::cerr << "Destructor called: " << name << "\n";
+Zombie::~Zombie(void) {
+  std::clog << "[ DEBUG ] " << name << ": Destructor called\n";
 }
 
-// void	Zombie::announce(void) const
-void	Zombie::announce(void)
-{
-	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
+void Zombie::announce(void) {
+  std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
 }

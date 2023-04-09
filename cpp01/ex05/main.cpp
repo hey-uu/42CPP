@@ -1,15 +1,13 @@
 #include "Harl.hpp"
 
-int	main(void)
-{
-	std::string levels[] = {
-		"DEBUG", "INFO", "WARNING", "ERROR",
-		"DEBUG\n", "INFO\n", "WARNING\n", "ERROR\n",
-		"THIS IS STRANGE"
-	};
-	Harl	harl;
+int main(void) {
+  std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR",
+                          "THIS IS STRANGE"};
+  Harl harl;
 
-	for (int i = 0; i < 9; i++)
-		harl.complain(levels[i]);
-	return (0);
+  for (int i = 0; i < 5; i++) {
+    std::cout << "INPUT : " << levels[i] << "\n";
+    harl.complain(levels[i]);
+  }
+  return (0);
 }

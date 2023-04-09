@@ -1,43 +1,31 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string const &name, Weapon &weapon) 
-		: name(name), weapon(weapon)
-{
-	std::cerr << "[HumanA] Complex constructor called : " << *this << "\n";
+HumanA::HumanA(std::string const& name, Weapon& weapon)
+    : _name(name), _weapon(weapon) {
+  std::cerr << "[ HumanA ] Complex constructor called : " << *this << "\n";
 }
 
-HumanA::~HumanA(void)
-{
-	std::cerr << "[HumanA] Default destructor called  : " << *this << "\n";
+HumanA::~HumanA(void) {
+  std::cerr << "[ HumanA ] Default destructor called  : " << *this << "\n";
 }
 
-void	HumanA::attack(void) const
-{
-	std::cout << name << " attacks with their " << weapon <<"\n";
+void HumanA::attack(void) const {
+  std::cout << _name << " attacks with their " << _weapon << "\n";
 }
 
-bool const	HumanA::hasWeapon(void) const
-{
-	return (true);
+void HumanA::setWeapon(Weapon const& weapon) {
+  _weapon = weapon;
 }
 
-void	HumanA::setWeapon(Weapon const &weapon)
-{
-	this->weapon = weapon;
+std::string const& HumanA::getName(void) const {
+  return (_name);
 }
 
-std::string const	&HumanA::getName(void) const
-{
-	return (name);
+Weapon const& HumanA::getWeapon(void) const {
+  return (_weapon);
 }
 
-Weapon const	&HumanA::getWeapon(void) const
-{
-	return (weapon);
-}
-
-std::ostream	&operator<<(std::ostream &outputStream, HumanA const &human)
-{
-	outputStream << "( " << human.getName() << ", " << human.getWeapon() << " )";
-	return (outputStream);
+std::ostream& operator<<(std::ostream& os, HumanA const& human) {
+  os << "( " << human.getName() << ", " << human.getWeapon() << " )";
+  return (os);
 }
