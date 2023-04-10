@@ -25,7 +25,7 @@ void ClapTrap::attack(std::string const& target) {
 
 void ClapTrap::takeDamage(unsigned int amount) {
   if (_hitPoints < amount) {
-	_hitPoints = 0;
+    _hitPoints = 0;
     std::cout << _name << " : ClapTrap has no more hit points left\n";
     return;
   }
