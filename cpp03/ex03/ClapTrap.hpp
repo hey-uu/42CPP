@@ -12,15 +12,15 @@ public:
   virtual void takeDamage(unsigned int amount);
   virtual void beRepaired(unsigned int amount);
   // getter
-  std::string const &getName(void) const;
-  unsigned int getHitPoints(void) const;
-  unsigned int getEnergyPoints(void) const;
-  unsigned int getAttackDamage(void) const;
+  virtual std::string const &getName(void) const;
+  virtual unsigned int getHitPoints(void) const;
+  virtual unsigned int getEnergyPoints(void) const;
+  virtual unsigned int getAttackDamage(void) const;
   // setter
-  void setName(std::string const &name);
-  void setHitPoints(unsigned int amount);
-  void setEnergyPoints(unsigned int amount);
-  void setAttackDamage(unsigned int amount);
+  virtual void setName(std::string const &name);
+  virtual void setHitPoints(unsigned int amount);
+  virtual void setEnergyPoints(unsigned int amount);
+  virtual void setAttackDamage(unsigned int amount);
   // show
   virtual void printStatus(void) const;
 

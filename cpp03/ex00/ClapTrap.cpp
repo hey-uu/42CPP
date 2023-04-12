@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string const& name)
+ClapTrap::ClapTrap(std::string const &name)
     : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
   std::clog << "[ DEBUG ] Constructor Called : " << name << "\n";
 }
@@ -9,7 +9,7 @@ ClapTrap::~ClapTrap(void) {
   std::clog << "[ DEBUG ] Destructor Called : " << _name << "\n";
 }
 
-void ClapTrap::attack(std::string const& target) {
+void ClapTrap::attack(std::string const &target) {
   if (_hitPoints == 0) {
     std::cout << _name << " : ClapTrap has no more hit points left\n";
     return;
@@ -49,11 +49,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
             << " Hit points\n";
 }
 
-void ClapTrap::setAttackDamage(unsigned int amount) {
-  _attackDamage = amount;
-  std::cout << _name << " : Claptrap's attack damage is set to " << amount
-            << "\n";
-}
+void ClapTrap::setAttackDamage(unsigned int amount) { _attackDamage = amount; }
 
 void ClapTrap::printStatus(void) const {
   std::cout << "===================== Current Status ====================\n";
