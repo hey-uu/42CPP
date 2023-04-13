@@ -1,60 +1,60 @@
 #include "DiamondTrap.hpp"
 
-// constructor
-DiamondTrap::DiamondTrap(std::string const &name, std::string const &)
-    : ClapTrap(name) {
-  std::clog << "[ DEBUG ] DiamondTrap constructor Called : " << name << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(100);
-  setAttackDamage(30);
+// orthodox canonical form
+DiamondTrap::DiamondTrap(void) : ScavTrap(), FragTrap() {
+  std::clog << "[ DEBUG ] DiamondTrap default constructor called" << std::endl;
 }
 
-// destructor
-DiamondTrap::~DiamondTrap(void) {
-  std::clog << "[ DEBUG ] DiamondTrap destructor Called : " << getName()
+DiamondTrap::DiamondTrap(std::string const &name) : ScavTrap(), FragTrap() {
+  _name = name;
+  ClapTrap::_name = name + "_clap_name";
+  std::clog << "[ DEBUG ] DiamondTrap string constructor Called : " << _name
             << std::endl;
 }
 
-// action
+DiamondTrap::DiamondTrap(DiamondTrap const &other) : ScavTrap(), FragTrap() {
+  _name = other._name;
+  ClapTrap::_name = other.ClapTrap::_name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] DiamondTrap copy constructor Called : " << _name
+            << std::endl;
+}
+
+DiamondTrap &DiamondTrap::operator=(DiamondTrap const &other) {
+  _name = other._name;
+  ClapTrap::_name = other.ClapTrap::_name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] DiamondTrap assignment operator Called : " << _name
+            << std::endl;
+  return (*this);
+}
+
+DiamondTrap::~DiamondTrap(void) {
+  std::clog << "[ DEBUG ] DiamondTrap destructor Called : " << ClapTrap::_name
+            << std::endl;
+}
+
+// overriding
 void DiamondTrap::attack(std::string const &target) {
   ScavTrap::attack(target);
 }
 
 // special
 void DiamondTrap::whoAmI(void) {
-  std::cout << "DiamondTrap Name : " << getName() << std::endl;
+  std::cout << "DiamondTrap Name : " << _name << std::endl;
 }
 
-// getter
-std::string const &DiamondTrap::getName(void) const { return (_name); }
-
-std::string const &DiamondTrap::getClapTrapName(void) const {
-  return (ScavTrap::getName());
-}
-
-unsigned int DiamondTrap::getHitPoints(void) const { return (FragTrap::getHitPoints()); }
-
-unsigned int DiamondTrap::getEnergyPoints(void) const {
-  return (ScavTrap::getEnergyPoints());
-}
-
-unsigned int DiamondTrap::getAttackDamage(void) const {
-  return (FragTrap::getAttackDamage());
-}
-
-// setter
-void DiamondTrap::setName(std::string const &name) { _name = name; }
-
-void DiamondTrap::setClapTrapName(std::string const &name) {
-  ClapTrap::setName(name);
-}
-
-void DiamondTrap::setHitPoints(unsigned int amount) { _hitPoints = amount; }
-
-void DiamondTrap::setEnergyPoints(unsigned int amount) {
-  _energyPoints = amount;
-}
-
-void DiamondTrap::setAttackDamage(unsigned int amount) {
-  _attackDamage = amount;
+// show
+void DiamondTrap::printStatus(void) const {
+  std::cout << "================= DiamondTrap Current Status ================\n";
+  std::cout << " + DiamondTrap Name : " << _name << "\n";
+  std::cout << " + ClapTrap Name : " << ClapTrap::_name << "\n";
+  std::cout << " + Hit Points : " << _hitPoints << "\n";
+  std::cout << " + Energy Points : " << _energyPoints << "\n";
+  std::cout << " + Attack Damage : " << _attackDamage << "\n";
+  std::cout << "==========================================================\n";
 }

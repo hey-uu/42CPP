@@ -1,5 +1,4 @@
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main(void)
 {
@@ -9,11 +8,13 @@ std::cout << "======================== TEST1 =========================" << std::
 	ClapTrap	clapTrap("Foo");
 	ScavTrap	scavTrap("Bar");
 	FragTrap	fragTrap("Baz");
+	DiamondTrap	diamondTrap("DIAMOND");
 
 	// after calling constructor
 	clapTrap.printStatus();
 	scavTrap.printStatus();
 	fragTrap.printStatus();
+	diamondTrap.printStatus();
 
 	// attack
 	clapTrap.setAttackDamage(1);

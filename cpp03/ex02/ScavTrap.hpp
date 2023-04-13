@@ -6,10 +6,16 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap {
- public:
+public:
+  // orthodox canonical form
+  ScavTrap(void);
   ScavTrap(std::string const &name);
+  ScavTrap(ScavTrap const &other);
+  ScavTrap &operator=(ScavTrap const &other);
   virtual ~ScavTrap(void);
-  virtual void attack(std::string const& target);
+  // overriding
+  virtual void attack(std::string const &target);
+  // special
   void guardGate(void);
 };
 

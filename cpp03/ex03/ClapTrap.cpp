@@ -1,13 +1,36 @@
 #include "ClapTrap.hpp"
 
-/** PUBLIC **/
-// constructor
-ClapTrap::ClapTrap(std::string const &name)
-    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::clog << "[ DEBUG ] ClapTrap constructor called : " << name << "\n";
+// orthodox canonical form
+ClapTrap::ClapTrap(void)
+    : _name(""), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::clog << "[ DEBUG ] ClapTrap default constructor called" << std::endl;
 }
 
-// destructor
+ClapTrap::ClapTrap(std::string const &name)
+    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::clog << "[ DEBUG ] ClapTrap string constructor called : " << name
+            << std::endl;
+}
+
+ClapTrap::ClapTrap(ClapTrap const &other) {
+  _name = other._name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] ClapTrap copy constructor called : " << _name
+            << std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(ClapTrap const &other) {
+  _name = other._name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] ClapTrap assignment operator called : " << _name
+            << std::endl;
+  return (*this);
+}
+
 ClapTrap::~ClapTrap(void) {
   std::clog << "[ DEBUG ] ClapTrap destructor called : " << _name << "\n";
 }
@@ -53,30 +76,14 @@ void ClapTrap::beRepaired(unsigned int amount) {
             << " Hit points\n";
 }
 
-// getter
-std::string const &ClapTrap::getName(void) const { return (_name); }
-
-unsigned int ClapTrap::getHitPoints(void) const { return (_hitPoints); }
-
-unsigned int ClapTrap::getEnergyPoints(void) const { return (_energyPoints); }
-
-unsigned int ClapTrap::getAttackDamage(void) const { return (_attackDamage); }
-
-// setter
-void ClapTrap::setName(std::string const &name) { _name = name; }
-
-void ClapTrap::setHitPoints(unsigned int amount) { _hitPoints = amount; }
-
-void ClapTrap::setEnergyPoints(unsigned int amount) { _energyPoints = amount; }
-
-void ClapTrap::setAttackDamage(unsigned int amount) { _attackDamage = amount; }
-
-// show
+// tests
 void ClapTrap::printStatus(void) const {
-  std::cout << "===================== Current Status ====================\n";
-  std::cout << " + Name : " << _name << "\n";
+  std::cout << "================= ClapTrap Current Status ================\n";
+  std::cout << " + ClapTrap Name : " << _name << "\n";
   std::cout << " + Hit Points : " << _hitPoints << "\n";
   std::cout << " + Energy Points : " << _energyPoints << "\n";
   std::cout << " + Attack Damage : " << _attackDamage << "\n";
-  std::cout << "=========================================================\n";
+  std::cout << "==========================================================\n";
 }
+
+void ClapTrap::setAttackDamage(unsigned int amount) { _attackDamage = amount; }

@@ -1,37 +1,53 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string const &name) : ClapTrap(name) {
-  std::clog << "[ DEBUG ] FragTrap constructor Called : " << name << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(100);
-  setAttackDamage(30);
+// orthodox canonical form
+FragTrap::FragTrap(void) : ClapTrap() {
+  _hitPoints = 100;
+  _energyPoints = 100;
+  _attackDamage = 30;
+  std::clog << "[ DEBUG ] FragTrap default constructor called" << std::endl;
 }
 
-FragTrap::~FragTrap(void) {
-  std::clog << "[ DEBUG ] FragTrap destructor Called : " << getName()
+FragTrap::FragTrap(std::string const &name) : ClapTrap(name) {
+  _hitPoints = 100;
+  _energyPoints = 100;
+  _attackDamage = 30;
+  std::clog << "[ DEBUG ] FragTrap string constructor Called : " << _name
             << std::endl;
 }
 
-void FragTrap::attack(std::string const &target) {
-  std::string const &name = getName();
-  unsigned int hitPoints = getHitPoints();
-  unsigned int energyPoints = getEnergyPoints();
-  unsigned int attackDamage = getAttackDamage();
+FragTrap::FragTrap(FragTrap const &other) : ClapTrap(other._name) {
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] FragTrap copy constructor Called : " << _name
+            << std::endl;
+}
 
-  if (hitPoints == 0) {
-    std::cout << name << " : FragTrap has no more hit points left" << std::endl;
-    return;
-  }
-  if (energyPoints == 0) {
-    std::cout << name << " : FragTrap has no more energy points left"
-              << std::endl;
-    return;
-  }
-  setEnergyPoints(energyPoints - 1);
-  std::cout << name << " : FragTrap attacks " << target << ", causing ";
-  std::cout << attackDamage << " points of damage!" << std::endl;
+FragTrap &FragTrap::operator=(FragTrap const &other) {
+  _name = other._name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] FragTrap assignment operator Called : " << _name
+            << std::endl;
+  return (*this);
+}
+
+FragTrap::~FragTrap(void) {
+  std::clog << "[ DEBUG ] FragTrap destructor Called : " << ClapTrap::_name
+            << std::endl;
 }
 
 void FragTrap::highFivesGuys(void) {
-  std::cout << getName() << " : Let's high five guys!!" << std::endl;
+  std::cout << _name << " : Let's high five guys!!" << std::endl;
+}
+
+void FragTrap::printStatus(void) const {
+  std::cout << "================= FragTrap Current Status ================\n";
+  std::cout << " + Name : " << _name << "\n";
+  std::cout << " + Hit Points : " << _hitPoints << "\n";
+  std::cout << " + Energy Points : " << _energyPoints << "\n";
+  std::cout << " + Attack Damage : " << _attackDamage << "\n";
+  std::cout << "==========================================================\n";
 }

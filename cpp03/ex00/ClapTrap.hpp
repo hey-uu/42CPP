@@ -4,16 +4,22 @@
 #include <iostream>
 
 class ClapTrap {
- public:
-  ClapTrap(std::string const& name);
+public:
+  // orthodox canonical form
+  ClapTrap(void);
+  ClapTrap(std::string const &name);
+  ClapTrap(ClapTrap const &other);
+  ClapTrap &operator=(ClapTrap const &other);
   ~ClapTrap(void);
-  void printStatus(void) const;
-  void attack(std::string const& target);
+  // actions
+  void attack(std::string const &target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
+  // tests
+  void printStatus(void) const;
   void setAttackDamage(unsigned int amount);
 
- private:
+private:
   std::string _name;
   unsigned int _hitPoints;
   unsigned int _energyPoints;

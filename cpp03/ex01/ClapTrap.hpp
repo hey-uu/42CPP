@@ -5,26 +5,21 @@
 
 class ClapTrap {
 public:
+  // orthodox canonical form
+  ClapTrap(void);
   ClapTrap(std::string const &name);
+  ClapTrap(ClapTrap const &other);
+  ClapTrap &operator=(ClapTrap const &other);
   virtual ~ClapTrap(void);
   // actions
   virtual void attack(std::string const &target);
-  virtual void takeDamage(unsigned int amount);
-  virtual void beRepaired(unsigned int amount);
-  // getter
-  std::string const &getName(void) const;
-  unsigned int getHitPoints(void) const;
-  unsigned int getEnergyPoints(void) const;
-  unsigned int getAttackDamage(void) const;
-  // setter
-  void setName(std::string const &name);
-  void setHitPoints(unsigned int amount);
-  void setEnergyPoints(unsigned int amount);
+  void takeDamage(unsigned int amount);
+  void beRepaired(unsigned int amount);
+  // tests
+  void printStatus(void) const;
   void setAttackDamage(unsigned int amount);
-  // show
-  virtual void printStatus(void) const;
 
-private:
+protected:
   std::string _name;
   unsigned int _hitPoints;
   unsigned int _energyPoints;

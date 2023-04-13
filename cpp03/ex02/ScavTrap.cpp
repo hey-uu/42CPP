@@ -1,38 +1,63 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name) {
-  std::clog << "[ DEBUG ] ScavTrap constructor Called : " << name << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(50);
-  setAttackDamage(20);
+// orthodox canonical form
+ScavTrap::ScavTrap(void) : ClapTrap() {
+  _hitPoints = 100;
+  _energyPoints = 50;
+  _attackDamage = 20;
+  std::clog << "[ DEBUG ] ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::~ScavTrap(void) {
-  std::clog << "[ DEBUG ] ScavTrap destructor Called : " << getName()
+ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name) {
+  _hitPoints = 100;
+  _energyPoints = 50;
+  _attackDamage = 20;
+  std::clog << "[ DEBUG ] ScavTrap string constructor Called : " << _name
             << std::endl;
 }
 
-void ScavTrap::attack(std::string const &target) {
-  std::string const &name = getName();
-  unsigned int hitPoints = getHitPoints();
-  unsigned int energyPoints = getEnergyPoints();
-  unsigned int attackDamage = getAttackDamage();
+ScavTrap::ScavTrap(ScavTrap const &other) : ClapTrap(other._name) {
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] ScavTrap copy constructor Called : " << _name
+            << std::endl;
+}
 
-  if (hitPoints == 0) {
-    std::cout << name << " : ScavTrap has no more hit points left" << std::endl;
-    return;
-  }
-  if (energyPoints == 0) {
-    std::cout << name << " : ScavTrap has no more energy points left"
+ScavTrap &ScavTrap::operator=(ScavTrap const &other) {
+  _name = other._name;
+  _hitPoints = other._hitPoints;
+  _energyPoints = other._energyPoints;
+  _attackDamage = other._attackDamage;
+  std::clog << "[ DEBUG ] ScavTrap assignment operator Called : " << _name
+            << std::endl;
+  return (*this);
+}
+
+ScavTrap::~ScavTrap(void) {
+  std::clog << "[ DEBUG ] ScavTrap destructor Called : " << ClapTrap::_name
+            << std::endl;
+}
+
+// overriding
+void ScavTrap::attack(std::string const &target) {
+  if (_hitPoints == 0) {
+    std::cout << _name << " : ScavTrap has no more hit points left"
               << std::endl;
     return;
   }
-  setEnergyPoints(energyPoints - 1);
-  std::cout << name << " : ScavTrap attacks " << target << ", causing ";
-  std::cout << attackDamage << " points of damage!" << std::endl;
+  if (_energyPoints == 0) {
+    std::cout << _name << " : ScavTrap has no more energy points left"
+              << std::endl;
+    return;
+  }
+  _energyPoints -= 1;
+  std::cout << _name << " : ScavTrap attacks " << target << ", causing ";
+  std::cout << _attackDamage << " points of damage!" << std::endl;
 }
 
+// special function
 void ScavTrap::guardGate(void) {
-  std::cout << getName() << ": ScavTrap is now in Gate Keeper Mode!!"
+  std::cout << ClapTrap::_name << ": ScavTrap is now in Gate Keeper Mode!!"
             << std::endl;
 }
