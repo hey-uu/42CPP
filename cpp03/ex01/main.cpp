@@ -1,49 +1,51 @@
 #include "ScavTrap.hpp"
 
-int	main(void)
-{
+int main(void) {
 
-std::cout << "======================== TEST1 =========================" << std::endl;
-/** TEST1 : ClapTrap vs ScavTrap **/
-	ClapTrap	clapTrap("Foo");
-	ScavTrap	scavTrap("Bar");
+  std::cout << "======================== TEST1 ========================="
+            << std::endl;
+  /** TEST1 : ClapTrap vs ScavTrap **/
+  ClapTrap clapTrap("Foo");
+  ScavTrap scavTrap("Bar");
 
-	// after calling constructor
-	clapTrap.printStatus();
-	scavTrap.printStatus();
+  // after calling constructor
+  clapTrap.printStatus();
+  scavTrap.printStatus();
 
-	// attack
-	clapTrap.setAttackDamage(1);
-	clapTrap.attack("opponent1");
-	
-	scavTrap.attack("opponent2");
-	
-	// guardGate
-	scavTrap.guardGate();
+  // attack
+  clapTrap.setAttackDamage(1);
+  clapTrap.attack("opponent1");
 
-std::cout << std::endl << std::endl;
-std::cout << "========================= TEST2 =========================" << std::endl;
-/** Test2 : ClapTrap *, ScavTrap * **/
-	ClapTrap	*clapTrap2 = new ClapTrap("Foo");
-	ClapTrap	*scavTrap2 = new ScavTrap("Bar");
-	ScavTrap	*scavTrap3 = new ScavTrap("Baz");
+  scavTrap.attack("opponent2");
 
-	// show
-	clapTrap2->printStatus();
-	scavTrap2->printStatus();
-	scavTrap3->printStatus();
+  // guardGate
+  scavTrap.guardGate();
 
-	// attack
-	clapTrap2->attack("opponent3");
-	scavTrap2->attack("opponent4");
-	scavTrap3->attack("opponent5");
+  std::cout << std::endl << std::endl;
+  std::cout << "========================= TEST2 ========================="
+            << std::endl;
+  /** Test2 : ClapTrap *, ScavTrap * **/
+  ClapTrap *clapTrap2 = new ClapTrap("Foo");
+  ClapTrap *scavTrap2 = new ScavTrap("Bar");
+  ScavTrap *scavTrap3 = new ScavTrap("Baz");
 
-	// special function
-	// scavTrap2->guardGate();
-	scavTrap3->guardGate();
+  // show
+  clapTrap2->printStatus();
+  scavTrap2->printStatus();
+  scavTrap3->printStatus();
 
-	delete clapTrap2;
-	delete scavTrap2;
-	delete scavTrap3;
-std::cout << "=========================================================" << std::endl;
+  // attack
+  clapTrap2->attack("opponent3");
+  scavTrap2->attack("opponent4");
+  scavTrap3->attack("opponent5");
+
+  // special function
+  // scavTrap2->guardGate();
+  scavTrap3->guardGate();
+
+  delete clapTrap2;
+  delete scavTrap2;
+  delete scavTrap3;
+  std::cout << "========================================================="
+            << std::endl;
 }

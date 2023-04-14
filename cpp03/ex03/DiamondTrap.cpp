@@ -50,7 +50,8 @@ void DiamondTrap::whoAmI(void) {
 
 // show
 void DiamondTrap::printStatus(void) const {
-  std::cout << "================= DiamondTrap Current Status ================\n";
+  std::cout
+      << "================= DiamondTrap Current Status ================\n";
   std::cout << " + DiamondTrap Name : " << _name << "\n";
   std::cout << " + ClapTrap Name : " << ClapTrap::_name << "\n";
   std::cout << " + Hit Points : " << _hitPoints << "\n";

@@ -7,13 +7,13 @@
 
 class FragTrap : public ClapTrap {
 public:
-// orthodox canonical form
+  // orthodox canonical form
   FragTrap(void);
   FragTrap(std::string const &name);
   FragTrap(FragTrap const &other);
   FragTrap &operator=(FragTrap const &other);
   virtual ~FragTrap(void);
-// special functions
+  // special functions
   void highFivesGuys(void);
 };
 
