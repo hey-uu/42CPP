@@ -15,6 +15,7 @@ public:
   DiamondTrap &operator=(DiamondTrap const &other);
   virtual ~DiamondTrap(void);
   // actions
+  // using ScavTrap::attack;
   virtual void attack(std::string const &target);
   // special function
   void whoAmI(void);

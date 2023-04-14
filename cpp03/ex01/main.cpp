@@ -28,21 +28,17 @@ int main(void) {
   ClapTrap *clapTrap2 = new ClapTrap("Foo");
   ClapTrap *scavTrap2 = new ScavTrap("Bar");
   ScavTrap *scavTrap3 = new ScavTrap("Baz");
-
   // show
   clapTrap2->printStatus();
   scavTrap2->printStatus();
   scavTrap3->printStatus();
-
   // attack
   clapTrap2->attack("opponent3");
   scavTrap2->attack("opponent4");
   scavTrap3->attack("opponent5");
-
   // special function
   // scavTrap2->guardGate();
   scavTrap3->guardGate();
-
   delete clapTrap2;
   delete scavTrap2;
   delete scavTrap3;

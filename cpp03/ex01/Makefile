@@ -12,7 +12,7 @@ CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS				=	main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS				=	main.cpp ClapTrap.cpp ScavTrap.cpp AbcTrap.cpp
 OBJS				=	$(SRCS:.cpp=.o)
 
 # BUILD

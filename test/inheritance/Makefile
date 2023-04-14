@@ -5,14 +5,14 @@ NAME				=	ClapTrap
 
 # COMPILE FLAGS
 CXX					=	c++
-CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98 -Wshadow
+CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98 -Wshadow-all
 CXXFLAGS_SANITIZE	=	-fsanitize=address -g3
 ifdef SANITIZE
 CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS				=	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+SRCS				=	main.cpp
 OBJS				=	$(SRCS:.cpp=.o)
 
 # BUILD
