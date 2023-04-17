@@ -24,6 +24,15 @@ private:
   unsigned int _hitPoints;
   unsigned int _energyPoints;
   unsigned int _attackDamage;
+
+  static const int _kWidth = 5;
+
+  // utils
+  void _printName(void) const;
+  void _printHitPoints(void) const;
+  void _printEnergyPoints(void) const;
+  bool _isDead(void) const;
+  bool _isExhausted(void) const;
 };
 
 #endif
