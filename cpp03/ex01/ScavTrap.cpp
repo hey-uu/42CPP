@@ -53,3 +53,18 @@ void ScavTrap::guardGate(void) {
   _printName();
   std::cout << ": ScavTrap is now in Gate Keeper Mode!!" << std::endl;
 }
+
+// extra
+void ScavTrap::printInfo(void) const {
+  std::cout << "\n================================== INFO "
+               "================================="
+            << std::endl;
+  std::cout << " + Type : ScavTrap" << std::endl;
+  std::cout << " + Name : " << _name << std::endl;
+  std::cout << " + Hit Points : " << _hitPoints << std::endl;
+  std::cout << " + Energy Points : " << _energyPoints << std::endl;
+  std::cout << " + Attack Damage : " << _attackDamage << std::endl;
+  std::cout << "=============================================================="
+               "===========\n"
+            << std::endl;
+}

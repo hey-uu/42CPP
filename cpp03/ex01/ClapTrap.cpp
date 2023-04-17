@@ -75,11 +75,12 @@ void ClapTrap::beRepaired(unsigned int amount) {
   _printEnergyPoints();
 }
 
-// tests
-void ClapTrap::printStatus(void) const {
+// extra
+void ClapTrap::printInfo(void) const {
   std::cout << "\n================================== INFO "
                "================================="
             << std::endl;
+  std::cout << " + Type : ClapTrap" << std::endl;
   std::cout << " + Name : " << _name << std::endl;
   std::cout << " + Hit Points : " << _hitPoints << std::endl;
   std::cout << " + Energy Points : " << _energyPoints << std::endl;

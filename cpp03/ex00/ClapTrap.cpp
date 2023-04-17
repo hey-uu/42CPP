@@ -4,12 +4,13 @@
 // orthodox canonical form
 ClapTrap::ClapTrap(void)
     : _name(""), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::clog << "[ DEBUG ] ClapTrap Default constructor called" << std::endl;
+  std::clog << "[ DEBUG ] ClapTrap default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string const &name)
     : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::clog << "[ DEBUG ] ClapTrap String constructor called : " << name << std::endl;
+  std::clog << "[ DEBUG ] ClapTrap string constructor called : " << name
+            << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const &other) {
@@ -17,7 +18,8 @@ ClapTrap::ClapTrap(ClapTrap const &other) {
   _hitPoints = other._hitPoints;
   _energyPoints = other._energyPoints;
   _attackDamage = other._attackDamage;
-  std::clog << "[ DEBUG ] ClapTrap Copy constructor called : " << _name << std::endl;
+  std::clog << "[ DEBUG ] ClapTrap copy constructor called : " << _name
+            << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(ClapTrap const &other) {
@@ -27,12 +29,13 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &other) {
     _energyPoints = other._energyPoints;
     _attackDamage = other._attackDamage;
   }
-  std::clog << "[ DEBUG ] ClapTrap Assignment operator called : " << _name << std::endl;
+  std::clog << "[ DEBUG ] ClapTrap assignment operator called : " << _name
+            << std::endl;
   return (*this);
 }
 
 ClapTrap::~ClapTrap(void) {
-  std::clog << "[ DEBUG ] ClapTrap Destructor called : " << _name << std::endl;
+  std::clog << "[ DEBUG ] ClapTrap destructor called : " << _name << std::endl;
 }
 
 // actions
@@ -73,10 +76,11 @@ void ClapTrap::beRepaired(unsigned int amount) {
 }
 
 // tests
-void ClapTrap::printStatus(void) const {
+void ClapTrap::printInfo(void) const {
   std::cout << "\n================================== INFO "
                "================================="
             << std::endl;
+  std::cout << " + Type : ClapTrap" << std::endl;
   std::cout << " + Name : " << _name << std::endl;
   std::cout << " + Hit Points : " << _hitPoints << std::endl;
   std::cout << " + Energy Points : " << _energyPoints << std::endl;

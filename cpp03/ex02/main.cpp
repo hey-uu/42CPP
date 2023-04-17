@@ -3,17 +3,18 @@
 
 int main(void) {
 
-  std::cout << "======================== TEST1 ========================="
+  /** TEST1 : ClapTrap vs ScavTrap vs FragTrap **/
+  std::cout << "\n================================= TEST1 "
+               "=================================\n"
             << std::endl;
-  /** TEST1 : ClapTrap vs ScavTrap **/
   ClapTrap clapTrap("Foo");
   ScavTrap scavTrap("Bar");
   FragTrap fragTrap("Baz");
 
   // after calling constructor
-  clapTrap.printStatus();
-  scavTrap.printStatus();
-  fragTrap.printStatus();
+  clapTrap.printInfo();
+  scavTrap.printInfo();
+  fragTrap.printInfo();
 
   // attack
   clapTrap.setAttackDamage(1);
@@ -25,42 +26,87 @@ int main(void) {
   scavTrap.guardGate();
   fragTrap.highFivesGuys();
 
-  std::cout << std::endl << std::endl;
-  std::cout << "========================= TEST2 ========================="
+  std::cout << "\n===================================="
+               "=====================================\n"
             << std::endl;
-  /** Test2 : ClapTrap *, ScavTrap * **/
-  ClapTrap *clapTrap2 = new ClapTrap("Foo");
-  ClapTrap *scavTrap2 = new ScavTrap("Bar");
-  ScavTrap *scavTrap3 = new ScavTrap("Baz");
-  FragTrap *fragTrap2 = new FragTrap("Qux");
+
+  /** Test2 : ClapTrap *, ScavTrap *, FragTrap * **/
+  std::cout << "\n================================= TEST2 "
+               "=================================\n"
+            << std::endl;
+  ClapTrap *clapTrap_ptr = new ClapTrap("Foo");
+  ClapTrap *scavTrap_ptr1 = new ScavTrap("Bar");
+  ScavTrap *scavTrap_ptr2 = new ScavTrap("Baz");
+  ClapTrap *fragTrap_ptr1 = new FragTrap("Qux");
+  FragTrap *fragTrap_ptr2 = new FragTrap("Fred");
 
   // show
-  clapTrap2->printStatus();
-  scavTrap2->printStatus();
-  scavTrap3->printStatus();
-  fragTrap2->printStatus();
+  clapTrap_ptr->printInfo();
+  scavTrap_ptr1->printInfo();
+  scavTrap_ptr2->printInfo();
+  fragTrap_ptr1->printInfo();
+  fragTrap_ptr2->printInfo();
 
   // attack
-  clapTrap2->attack("opponent1");
-  scavTrap2->attack("opponent2");
-  scavTrap3->attack("opponent3");
-  fragTrap2->attack("opponent4");
+  clapTrap_ptr->attack("opponent1");
+  scavTrap_ptr1->attack("opponent2");
+  scavTrap_ptr2->attack("opponent3");
+  fragTrap_ptr1->attack("opponent4");
+  fragTrap_ptr2->attack("opponent5");
 
   // show
-  clapTrap2->printStatus();
-  scavTrap2->printStatus();
-  scavTrap3->printStatus();
-  fragTrap2->printStatus();
+  clapTrap_ptr->printInfo();
+  scavTrap_ptr1->printInfo();
+  scavTrap_ptr2->printInfo();
+  fragTrap_ptr1->printInfo();
+  fragTrap_ptr2->printInfo();
 
   // unique
-  // scavTrap2->guardGate();
-  scavTrap3->guardGate();
-  fragTrap2->highFivesGuys();
+  // scavTrap_ptr1->guardGate();
+  scavTrap_ptr2->guardGate();
+  // fragTrap_ptr1->highFivesGuys();
+  fragTrap_ptr2->highFivesGuys();
 
-  delete clapTrap2;
-  delete scavTrap2;
-  delete scavTrap3;
-  delete fragTrap2;
-  std::cout << "========================================================="
+  delete clapTrap_ptr;
+  delete scavTrap_ptr1;
+  delete scavTrap_ptr2;
+  delete fragTrap_ptr1;
+  delete fragTrap_ptr2;
+
+  std::cout << "\n===================================="
+               "=====================================\n"
+            << std::endl;
+
+  /** Test3 : ClapTrap reference, ScavTrap reference, FragTrap reference**/
+  std::cout << "\n================================= TEST3 "
+               "=================================\n"
+            << std::endl;
+  ClapTrap &clapTrap_ref = clapTrap;
+  ClapTrap &scavTrap_ref1 = scavTrap;
+  ScavTrap &scavTrap_ref2 = scavTrap;
+  ClapTrap &fragTrap_ref1 = fragTrap;
+  FragTrap &fragTrap_ref2 = fragTrap;
+
+  // show
+  clapTrap_ref.printInfo();
+  scavTrap_ref1.printInfo();
+  scavTrap_ref2.printInfo();
+  fragTrap_ref1.printInfo();
+  fragTrap_ref2.printInfo();
+
+  // attack
+  clapTrap_ref.attack("opponent1");
+  scavTrap_ref1.attack("opponent2");
+  scavTrap_ref2.attack("opponent3");
+  fragTrap_ref1.attack("opponent4");
+  fragTrap_ref2.attack("opponent5");
+
+  // special function
+  // scavTrap_ref1.guardGate();
+  scavTrap_ref2.guardGate();
+  // fragTrap_ref1.highFivesGuys();
+  fragTrap_ref2.highFivesGuys();
+  std::cout << "\n===================================="
+               "=====================================\n"
             << std::endl;
 }

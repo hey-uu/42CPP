@@ -13,10 +13,12 @@ public:
   FragTrap(FragTrap const &other);
   FragTrap &operator=(FragTrap const &other);
   virtual ~FragTrap(void);
-  // special function
+  // overriding
+  virtual void attack(std::string const &target);
+  // special
   void highFivesGuys(void);
-  // show
-  virtual void printStatus(void) const;
+  // extra
+  virtual void printInfo(void) const;
 };
 
 #endif

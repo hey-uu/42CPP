@@ -17,6 +17,8 @@ public:
   virtual void attack(std::string const &target);
   // special
   void guardGate(void);
+  // extra
+  virtual void printInfo(void) const;
 };
 
 #endif

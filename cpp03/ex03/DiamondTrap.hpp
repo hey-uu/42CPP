@@ -20,7 +20,7 @@ public:
   // special function
   void whoAmI(void);
   // show
-  virtual void printStatus(void) const;
+  virtual void printInfo(void) const;
 
 private:
   std::string _name;

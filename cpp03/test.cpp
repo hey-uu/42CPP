@@ -19,7 +19,6 @@ public:
   using A::func;
   virtual void func(void) { std::cout << "C\n"; }
 };
-
 class D : public B, public C {
   using A::func;
   using B::func; // 컴파일 에러

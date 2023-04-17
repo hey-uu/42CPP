@@ -15,8 +15,8 @@ public:
   void attack(std::string const &target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
-  // tests
-  void printStatus(void) const;
+  // extra
+  void printInfo(void) const;
   void setAttackDamage(unsigned int amount);
 
 private:
@@ -27,7 +27,7 @@ private:
 
   static const int _kWidth = 5;
 
-  // utils
+  // extra
   void _printName(void) const;
   void _printHitPoints(void) const;
   void _printEnergyPoints(void) const;

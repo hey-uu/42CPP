@@ -15,8 +15,8 @@ public:
   virtual void attack(std::string const &target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
-  // tests
-  virtual void printStatus(void) const;
+  // extra
+  virtual void printInfo(void) const;
   void setAttackDamage(unsigned int amount);
 
 protected:
@@ -24,6 +24,15 @@ protected:
   unsigned int _hitPoints;
   unsigned int _energyPoints;
   unsigned int _attackDamage;
+
+  static const int _kWidth = 20;
+
+  // extra
+  bool _isDead(std::string const &type) const;
+  bool _isExhausted(std::string const &type) const;
+  void _printName(void) const;
+  void _printHitPoints(void) const;
+  void _printEnergyPoints(void) const;
 };
 
 #endif

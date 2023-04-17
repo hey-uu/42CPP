@@ -16,19 +16,18 @@ FragTrap::FragTrap(std::string const &name) : ClapTrap(name) {
             << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const &other) : ClapTrap(other._name) {
-  _hitPoints = other._hitPoints;
-  _energyPoints = other._energyPoints;
-  _attackDamage = other._attackDamage;
+FragTrap::FragTrap(FragTrap const &other) : ClapTrap(other) {
   std::clog << "[ DEBUG ] FragTrap copy constructor Called : " << _name
             << std::endl;
 }
 
 FragTrap &FragTrap::operator=(FragTrap const &other) {
-  _name = other._name;
-  _hitPoints = other._hitPoints;
-  _energyPoints = other._energyPoints;
-  _attackDamage = other._attackDamage;
+  if (this != &other) {
+    _name = other._name;
+    _hitPoints = other._hitPoints;
+    _energyPoints = other._energyPoints;
+    _attackDamage = other._attackDamage;
+  }
   std::clog << "[ DEBUG ] FragTrap assignment operator Called : " << _name
             << std::endl;
   return (*this);
@@ -39,15 +38,32 @@ FragTrap::~FragTrap(void) {
             << std::endl;
 }
 
-void FragTrap::highFivesGuys(void) {
-  std::cout << _name << " : Let's high five guys!!" << std::endl;
+void FragTrap::attack(std::string const &target) {
+  _printName();
+  if (_isDead("FragTrap") || _isExhausted("FragTrap"))
+    return;
+  _energyPoints -= 1;
+  std::cout << ": FragTrap attacks " << target << ", causing ";
+  std::cout << _attackDamage << " points of damage!" << std::endl;
+  _printEnergyPoints();
 }
 
-void FragTrap::printStatus(void) const {
-  std::cout << "================= FragTrap Current Status ================\n";
-  std::cout << " + Name : " << _name << "\n";
-  std::cout << " + Hit Points : " << _hitPoints << "\n";
-  std::cout << " + Energy Points : " << _energyPoints << "\n";
-  std::cout << " + Attack Damage : " << _attackDamage << "\n";
-  std::cout << "==========================================================\n";
+void FragTrap::highFivesGuys(void) {
+  _printName();
+  std::cout << ": Let's high five guys!!" << std::endl;
+}
+
+// extra
+void FragTrap::printInfo(void) const {
+  std::cout << "\n================================== INFO "
+               "================================="
+            << std::endl;
+  std::cout << " + Type : FragTrap" << std::endl;
+  std::cout << " + Name : " << _name << std::endl;
+  std::cout << " + Hit Points : " << _hitPoints << std::endl;
+  std::cout << " + Energy Points : " << _energyPoints << std::endl;
+  std::cout << " + Attack Damage : " << _attackDamage << std::endl;
+  std::cout << "=============================================================="
+               "===========\n"
+            << std::endl;
 }

@@ -10,8 +10,8 @@ int main(void) {
   ScavTrap scavTrap("Bar");
 
   // after calling constructor
-  clapTrap.printStatus();
-  scavTrap.printStatus();
+  clapTrap.printInfo();
+  scavTrap.printInfo();
 
   // attack
   clapTrap.setAttackDamage(1);
@@ -33,9 +33,9 @@ int main(void) {
   ClapTrap *scavTrap2 = new ScavTrap("Bar");
   ScavTrap *scavTrap3 = new ScavTrap("Baz");
   // show
-  clapTrap2->printStatus();
-  scavTrap2->printStatus();
-  scavTrap3->printStatus();
+  clapTrap2->printInfo();
+  scavTrap2->printInfo();
+  scavTrap3->printInfo();
   // attack
   clapTrap2->attack("opponent3");
   scavTrap2->attack("opponent4");
@@ -58,9 +58,9 @@ int main(void) {
   ClapTrap &scavTrap_ref1 = scavTrap;
   ScavTrap &scavTrap_ref2 = scavTrap;
   // show
-  clapTrap_ref.printStatus();
-  scavTrap_ref1.printStatus();
-  scavTrap_ref2.printStatus();
+  clapTrap_ref.printInfo();
+  scavTrap_ref1.printInfo();
+  scavTrap_ref2.printInfo();
   // attack
   clapTrap_ref.attack("opponent3");
   scavTrap_ref1.attack("opponent4");
@@ -68,7 +68,7 @@ int main(void) {
   // special function
   // scavTrap4.guardGate();
   scavTrap_ref2.guardGate();
-   std::cout << "\n===================================="
+  std::cout << "\n===================================="
                "=====================================\n"
             << std::endl;
 }
