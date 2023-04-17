@@ -12,7 +12,15 @@ CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS				=	main.cpp ClapTrap.cpp
+SRCS				=	main.cpp \
+							AMateria.cpp \
+							Character.cpp \
+							Cure.cpp \
+							Ice.cpp \
+							ICharacter.cpp \
+							IMateriaSource.cpp \
+							MateriaSource.cpp \
+							debug_msg.cpp
 OBJS				=	$(SRCS:.cpp=.o)
 
 # BUILD
