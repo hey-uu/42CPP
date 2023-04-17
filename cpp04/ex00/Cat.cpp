@@ -1,18 +1,21 @@
 #include "Cat.hpp"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-Cat::Cat(void) : Animal("Cat") {
+const std::string Cat::_kTypeCat = "Cat";
+
+Cat::Cat(void) : Animal(_kTypeCat) {
   std::clog << "[ DEBUG ] Cat default constructor called" << std::endl;
 }
 
-Cat::Cat(Cat const &other) : Animal(other._type) {
+Cat::Cat(Cat const &other) : Animal(_kTypeCat) {
+  (void) other;
   std::clog << "[ DEBUG ] Cat copy constructor called" << std::endl;
 }
 
 Cat &Cat::operator=(Cat const &other) {
+  (void) other;
   std::clog << "[ DEBUG ] Cat assignment operator called" << std::endl;
-  _type = other._type;
   return (*this);
 }
 
@@ -21,6 +24,6 @@ Cat::~Cat(void) {
 }
 
 void Cat::makeSound(void) const {
-  std::cout << std::setw(16) << std::left << "Animal( cat )";
+  std::cout << std::setw(_kWidth) << std::left << "Animal( cat )";
   std::cout << " : MEOW~ MEOW~ MEOW~ " << std::endl;
 }

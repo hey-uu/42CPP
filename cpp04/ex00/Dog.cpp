@@ -1,18 +1,21 @@
 #include "Dog.hpp"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-Dog::Dog(void) : Animal("Dog") {
+const std::string Dog::_kTypeDog = "Dog";
+
+Dog::Dog(void) : Animal(_kTypeDog) {
   std::clog << "[ DEBUG ] Dog default constructor called" << std::endl;
 }
 
-Dog::Dog(Dog const &other) : Animal(other._type) {
+Dog::Dog(Dog const &other) : Animal(_kTypeDog) {
+  (void) other;
   std::clog << "[ DEBUG ] Dog copy constructor called" << std::endl;
 }
 
 Dog &Dog::operator=(Dog const &other) {
+  (void) other;
   std::clog << "[ DEBUG ] Dog assignment operator called" << std::endl;
-  _type = other._type;
   return (*this);
 }
 
@@ -21,6 +24,6 @@ Dog::~Dog(void) {
 }
 
 void Dog::makeSound(void) const {
-  std::cout << std::setw(16) << std::left << "Animal( dog )";
+  std::cout << std::setw(_kWidth) << std::left << "Animal( dog )";
   std::cout << " : BARK! BARK! BARK!" << std::endl;
 }

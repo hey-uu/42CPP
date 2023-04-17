@@ -1,4 +1,4 @@
-#ifndef MATEIRA_SOURCE_HPP
+#ifndef MATERIA_SOURCE_HPP
 #define MATERIA_SOURCE_HPP
 
 #include "IMateriaSource.hpp"

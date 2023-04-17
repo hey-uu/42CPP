@@ -14,9 +14,8 @@ public:
   void showIdeasUpTo(int up_to) const;
 
 private:
-  int _count;
   std::string _ideas[100];
-  static const int _max_count = 100;
+  static const int _kMaxCnt = 100;
 };
 
 #endif

@@ -13,7 +13,7 @@ endif
 
 # FILES
 SRCS				=	main.cpp \
-							Animal.cpp \
+							AAnimal.cpp \
 							Cat.cpp \
 							Dog.cpp \
 							WrongAnimal.cpp \
@@ -34,14 +34,12 @@ clean:
 	$(RM) $(OBJS)
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) out
 re: 
 	make fclean
 	make all
 test:
 	make re -j8
 	./Animal &> out
-test_clean:
-	make fclean
-	rm -f out
 
-.PHONY: all clean fclean re bonus test test_clean
+.PHONY: all clean fclean re bonus test

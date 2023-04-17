@@ -16,7 +16,7 @@ public:
   virtual void unequip(int idx);
   virtual void use(int idx, ICharacter &target);
 
-  virtual AMateria const *getItemPtr(int idx);
+  virtual AMateria const *getItemPtr(int idx) const;
 
 private:
   AMateria *_invent[4];

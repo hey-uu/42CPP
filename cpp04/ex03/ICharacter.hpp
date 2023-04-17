@@ -20,7 +20,7 @@ public:
 
   // show
   void  showName(void) const;
-  virtual AMateria const *getItemPtr(int idx) = 0;
+  virtual AMateria const *getItemPtr(int idx) const = 0;
 
 protected:
   std::string _name;

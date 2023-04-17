@@ -6,10 +6,13 @@
 class Dog : public Animal {
 public:
   Dog(void);
-  Dog(Dog const &other);
-  Dog &operator=(Dog const &other);
   virtual ~Dog(void);
   virtual void makeSound(void) const;
+
+private:
+  static const std::string _kTypeDog;
+  Dog(Dog const &other);
+  Dog &operator=(Dog const &other);
 };
 
 #endif

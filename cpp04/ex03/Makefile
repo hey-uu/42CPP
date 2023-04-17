@@ -1,7 +1,7 @@
 .DEFAULT_GOAL		=	all
 
 # PROGRAM NAME
-NAME				=	ClapTrap
+NAME				=	ex03
 
 # COMPILE FLAGS
 CXX					=	c++
@@ -35,9 +35,13 @@ bonus:
 clean:
 	$(RM) $(OBJS)
 fclean: clean
+	$(RM) out
 	$(RM) $(NAME)
 re: 
 	make fclean
 	make all
+test:
+	make re -j8
+	./ex03 &> out
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus test

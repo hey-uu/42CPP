@@ -1,4 +1,4 @@
-#ifndef I_MATEIRA_SOURCE_HPP
+#ifndef I_MATERIA_SOURCE_HPP
 #define I_MATERIA_SOURCE_HPP
 
 #include <string>

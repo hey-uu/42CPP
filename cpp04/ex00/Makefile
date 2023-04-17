@@ -33,8 +33,12 @@ clean:
 	$(RM) $(OBJS)
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) out
 re: 
 	make fclean
 	make all
+test:
+	make all
+	./Animal &> out
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus test

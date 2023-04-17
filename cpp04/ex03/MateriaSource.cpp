@@ -24,6 +24,8 @@ MateriaSource::MateriaSource(MateriaSource const &other)
 MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
   debug::printMateriaSource();
   debug::debugMsg(debug::kAssignOperator);
+  if (this == &other)
+    return (*this);
   for (int i = 0; i < _kCap; i++) {
     if (_srcs[i])
       delete _srcs[i];

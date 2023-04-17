@@ -22,7 +22,8 @@ ICharacter::ICharacter(ICharacter const &other) : _name(other._name) {
 ICharacter &ICharacter::operator=(ICharacter const &other) {
   debug::printICharacter();
   debug::debugMsg(debug::kAssignOperator);
-  _name = other._name;
+  if (this != &other)
+    _name = other._name;
   return (*this);
 }
 

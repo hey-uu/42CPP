@@ -6,10 +6,14 @@
 class WrongCat : public WrongAnimal {
 public:
   WrongCat(void);
-  WrongCat(WrongCat const &other);
-  WrongCat &operator=(WrongCat const &other);
   virtual ~WrongCat(void);
   void makeSound(void) const;
+
+private:
+  WrongCat(WrongCat const &other);
+  WrongCat &operator=(WrongCat const &other);
+  
+  static const std::string _kTypeWrongCat;
 };
 
 #endif

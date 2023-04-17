@@ -116,9 +116,9 @@ int main(void) {
             << std::endl
             << std::endl;
 
-  const WrongAnimal ref_wrong_meta = WrongAnimal();
-  const WrongCat ref_wrong_cat1 = WrongCat();
-  const WrongAnimal ref_wrong_cat2 = WrongCat();
+  const WrongAnimal &ref_wrong_meta = WrongAnimal();
+  const WrongCat &ref_wrong_cat1 = WrongCat();
+  const WrongAnimal &ref_wrong_cat2 = WrongCat();
 
   std::cout << std::endl << "== getType() ==" << std::endl;
   std::cout << "expected = WrongCat"

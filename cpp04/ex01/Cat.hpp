@@ -11,13 +11,16 @@ public:
   Cat(Cat const &other);
   Cat &operator=(Cat const &other);
   virtual ~Cat(void);
+
   virtual void makeSound(void) const;
   void showBrain(void) const;
   void showBrainUpTo(int upTo) const;
-  virtual Animal *clone(void);
+  virtual Animal *clone(void) const;
 
 private:
   Brain *_brain_ptr;
+  static const std::string _kTypeCat;
+
 };
 
 #endif

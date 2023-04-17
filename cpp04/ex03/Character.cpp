@@ -29,6 +29,8 @@ Character::Character(Character const &other) : ICharacter(other) {
 Character &Character::operator=(Character const &other) {
   debug::printCharacter();
   debug::debugMsg(debug::kAssignOperator);
+  if (this == &other)
+    return (*this);
   for (int idx = 0; idx < _kCap; idx++) {
     if (_invent[idx])
       delete _invent[idx];
@@ -91,6 +93,6 @@ void Character::use(int idx, ICharacter &target) {
     _invent[idx]->use(target);
 }
 
-AMateria const *Character::getItemPtr(int idx) {
+AMateria const *Character::getItemPtr(int idx) const {
   return (_invent[idx]);
 }

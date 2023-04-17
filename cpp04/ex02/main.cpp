@@ -1,7 +1,6 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
@@ -22,8 +21,8 @@ int main(void) {
             << std::endl
             << std::endl;
 
-  Animal *animal_arr[10];
-  Animal *animal_arr_copy[10];
+  AAnimal *animal_arr[10];
+  AAnimal *animal_arr_copy[10];
   Dog *dog_arr_copy[5];
   Cat *cat_arr_copy[5];
 

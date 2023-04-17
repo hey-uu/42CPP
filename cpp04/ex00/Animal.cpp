@@ -26,9 +26,9 @@ Animal::~Animal(void) {
 
 void Animal::makeSound(void) const {
   if (_type.length() > 0)
-    std::cout << std::setw(16) << std::left << "Animal( " + _type + " )";
+    std::cout << std::setw(_kWidth) << std::left << "Animal( " + _type + " )";
   else
-    std::cout << std::setw(16) << std::left << "Animal( ? )";
+    std::cout << std::setw(_kWidth) << std::left << "Animal( ? )";
   std::cout << " : PUHAKHAKHAK! " << std::endl;
 }
 
