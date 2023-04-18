@@ -14,12 +14,12 @@ public:
 
   virtual void makeSound(void) const;
   void showBrain(void) const;
-  void showBrainUpTo(int upTo) const;
+  void showBrainUpTo(int up_to) const;
   virtual Animal *clone(void) const;
 
 private:
-  Brain *_brain_ptr;
   static const std::string _kTypeDog;
+  Brain *_brain_ptr;
 };
 
 #endif

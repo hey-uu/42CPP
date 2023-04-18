@@ -17,7 +17,8 @@ AAnimal::AAnimal(AAnimal const &other) : _type(other._type) {
 
 AAnimal &AAnimal::operator=(AAnimal const &other) {
   std::clog << "[ DEBUG ] Animal assignment operator called" << std::endl;
-  _type = other._type;
+  if (this != &other)
+    _type = other._type;
   return (*this);
 }
 

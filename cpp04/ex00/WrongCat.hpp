@@ -7,13 +7,13 @@ class WrongCat : public WrongAnimal {
 public:
   WrongCat(void);
   virtual ~WrongCat(void);
+
   void makeSound(void) const;
 
 private:
+  static const std::string _kTypeWrongCat;
   WrongCat(WrongCat const &other);
   WrongCat &operator=(WrongCat const &other);
-  
-  static const std::string _kTypeWrongCat;
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <iostream>
 
-WrongAnimal::WrongAnimal(void) : _type("") {
+WrongAnimal::WrongAnimal(void) : _type("!") {
   std::clog << "[ DEBUG ] WrongAnimal default constructor called" << std::endl;
 }
 
@@ -16,7 +16,8 @@ WrongAnimal::WrongAnimal(WrongAnimal const &other) : _type(other._type) {
 
 WrongAnimal &WrongAnimal::operator=(WrongAnimal const &other) {
   std::clog << "[ DEBUG ] WrongAnimal assignment operator called" << std::endl;
-  _type = other._type;
+  if (this != &other)
+    _type = other._type;
   return (*this);
 }
 
@@ -25,12 +26,8 @@ WrongAnimal::~WrongAnimal(void) {
 }
 
 void WrongAnimal::makeSound(void) const {
-  if (_type.length() > 0)
-    std::cout << std::setw(_kWidth) << std::left
-              << "WrongAnimal( " + _type + " )";
-  else
-    std::cout << std::setw(_kWidth) << std::left << "WrongAnimal( ? )";
-  std::cout << " : HAKHAKHAKPU! " << std::endl;
+  std::cout << std::setw(_kWidth) << std::left << "WrongAnimal( " + _type + " )"
+            << " : HAKHAKHAKPU! " << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const { return (_type); }

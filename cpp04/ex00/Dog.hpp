@@ -7,6 +7,7 @@ class Dog : public Animal {
 public:
   Dog(void);
   virtual ~Dog(void);
+
   virtual void makeSound(void) const;
 
 private:

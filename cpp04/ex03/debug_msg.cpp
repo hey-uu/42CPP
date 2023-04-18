@@ -26,18 +26,6 @@ void debug::printIce(void) {
   std::clog << "| ";
 }
 
-void debug::printICharacter(void) {
-  std::clog << "\t";
-  std::clog << std::setw(kWidth) << std::left << "| ICharacter ";
-  std::clog << "| ";
-}
-
-void debug::printIMateriaSource(void) {
-  std::clog << "\t";
-  std::clog << std::setw(kWidth) << std::left << "| IMateriaSource ";
-  std::clog << "| ";
-}
-
 void debug::printMateriaSource(void) {
   std::clog << "\t";
   std::clog << std::setw(kWidth) << std::left << "| MateriaSource ";

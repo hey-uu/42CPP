@@ -9,12 +9,12 @@ WrongCat::WrongCat(void) : WrongAnimal(_kTypeWrongCat) {
 }
 
 WrongCat::WrongCat(WrongCat const &other) : WrongAnimal(_kTypeWrongCat) {
-  (void) other;
+  (void)other;
   std::clog << "[ DEBUG ] WrongCat copy constructor called" << std::endl;
 }
 
 WrongCat &WrongCat::operator=(WrongCat const &other) {
-  (void) other;
+  (void)other;
   std::clog << "[ DEBUG ] WrongCat assignment operator called" << std::endl;
   return (*this);
 }
@@ -24,6 +24,6 @@ WrongCat::~WrongCat(void) {
 }
 
 void WrongCat::makeSound(void) const {
-  std::cout << std::setw(_kWidth) << std::left << "WrongAnimal( wrongCat )";
-  std::cout << " : MEOW~ MEOW~ MEOW~ " << std::endl;
+  std::cout << std::setw(_kWidth) << std::left << "WrongAnimal( wrongCat )"
+            << " : MEOW~ MEOW~ MEOW~ " << std::endl;
 }

@@ -1,23 +1,21 @@
 #include "MateriaSource.hpp"
 #include "AMateria.hpp"
-#include <iostream>
 #include "debug_msg.hpp"
+#include <iostream>
 
 MateriaSource::MateriaSource(void) : IMateriaSource() {
   debug::printMateriaSource();
   debug::debugMsg(debug::kDefaultConstructor);
-  for (int i = 0; i < _kCap; i++)
-    _srcs[i] = NULL;
+  for (int idx = 0; idx < _kCap; idx++)
+    _srcs[idx] = NULL;
 }
 
 MateriaSource::MateriaSource(MateriaSource const &other)
     : IMateriaSource(other) {
   debug::printMateriaSource();
   debug::debugMsg(debug::kCopyConstructor);
-  for (int i = 0; i < _kCap; i++) {
-    if (_srcs[i])
-      delete _srcs[i];
-    _srcs[i] = (!other._srcs[i]) ? NULL : other._srcs[i]->clone();
+  for (int idx = 0; idx < _kCap; idx++) {
+    _srcs[idx] = (other._srcs[idx]) ? other._srcs[idx]->clone() : NULL;
   }
 }
 
@@ -26,10 +24,9 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
   debug::debugMsg(debug::kAssignOperator);
   if (this == &other)
     return (*this);
-  for (int i = 0; i < _kCap; i++) {
-    if (_srcs[i])
-      delete _srcs[i];
-    _srcs[i] = (!other._srcs[i]) ? NULL : other._srcs[i]->clone();
+  for (int idx = 0; idx < _kCap; idx++) {
+    delete _srcs[idx];
+    _srcs[idx] = (other._srcs[idx]) ? other._srcs[idx]->clone() : NULL;
   }
   return (*this);
 }
@@ -37,10 +34,10 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
 MateriaSource::~MateriaSource(void) {
   debug::printMateriaSource();
   debug::debugMsg(debug::kDestructor);
-  for (int i = 0; i < _kCap; i++) {
-    if (_srcs[i])
-      delete _srcs[i];
-    _srcs[i] = NULL;
+  for (int idx = 0; idx < _kCap; idx++) {
+    if (_srcs[idx])
+      delete _srcs[idx];
+    _srcs[idx] = NULL;
   }
 }
 
@@ -50,29 +47,33 @@ void MateriaSource::learnMateria(AMateria *m) {
     std::cout << "! The argument must not be NULL pointer !" << std::endl;
     return;
   }
-  for (int i = 0; i < _kCap; i++) {
-    if (_srcs[i] == NULL) {
-      _srcs[i] = m;
-      std::cout << "* Successed to learn new materia(" << m->getType() << ") *"
-                << std::endl;
-      return;
-    } else if (_srcs[i] == NULL) {
+  int empty_idx = -1;
+  for (int idx = 0; idx < _kCap; idx++) {
+    if (_srcs[idx] == m) {
       std::cout << "* You already know this materia(" << m->getType() << ") *"
                 << std::endl;
       return;
     }
+    if (_srcs[idx] == NULL && empty_idx < 0)
+      empty_idx = idx;
   }
-  std::cout << "! Failed to learn new materia !" << m->getType() << std::endl;
+  if (empty_idx < 0)
+    std::cout << "! Failed to learn new materia !" << m->getType() << std::endl;
+  else {
+    std::cout << "* Successed to learn new materia(" << m->getType() << ") *"
+              << std::endl;
+    _srcs[empty_idx] = m;
+  }
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type) {
   debug::printMateriaSource();
-  for (int i = 0; i < _kCap; i++) {
-    if (_srcs[i] == NULL)
+  for (int idx = 0; idx < _kCap; idx++) {
+    if (_srcs[idx] == NULL)
       continue;
-    if (_srcs[i]->getType() == type) {
+    if (_srcs[idx]->getType() == type) {
       std::cout << "Created a new Materia, " << type << std::endl;
-      return (_srcs[i]->clone());
+      return (_srcs[idx]->clone());
     }
   }
   std::cout << "There is no such type " << type << " in materia source"

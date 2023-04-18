@@ -18,8 +18,8 @@ public:
   virtual AAnimal *clone(void) const;
 
 private:
-  Brain *_brain_ptr;
   static const std::string _kTypeCat;
+  Brain *_brain_ptr;
 };
 
 #endif

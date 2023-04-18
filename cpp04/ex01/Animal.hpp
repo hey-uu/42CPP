@@ -6,7 +6,6 @@
 class Animal {
 public:
   Animal(void);
-  Animal(std::string const &type);
   virtual ~Animal(void);
 
   virtual void makeSound(void) const;
@@ -14,8 +13,9 @@ public:
   virtual Animal *clone(void) const;
 
 protected:
-  std::string _type;
   static const int _kWidth = 16;
+  std::string _type;
+  Animal(std::string const &type);
 
 private:
   Animal(Animal const &other);

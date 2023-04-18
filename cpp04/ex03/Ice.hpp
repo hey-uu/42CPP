@@ -7,12 +7,13 @@ class Ice : public AMateria {
 public:
   Ice(void);
   virtual ~Ice(void);
-  Ice(Ice const &other);
-  Ice &operator=(Ice const &other);
 
   virtual AMateria *clone() const;
   virtual void use(ICharacter &target);
 
+private:
+  Ice(Ice const &other);
+  Ice &operator=(Ice const &other);
 };
 
 #endif

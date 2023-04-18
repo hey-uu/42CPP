@@ -4,7 +4,6 @@
 
 Brain::Brain(void) {
   std::clog << "[ DEBUG ] Brain default constructor called" << std::endl;
-
   std::stringstream ss;
   std::string str;
   for (int i = 0; i < _kMaxCnt; i++) {
@@ -17,7 +16,6 @@ Brain::Brain(void) {
 
 Brain::Brain(std::string const &prefix) {
   std::clog << "[ DEBUG ] Brain string constructor called" << std::endl;
-
   std::stringstream ss;
   std::string str;
   for (int i = 0; i < _kMaxCnt; i++) {
@@ -30,14 +28,12 @@ Brain::Brain(std::string const &prefix) {
 
 Brain::Brain(Brain const &other) {
   std::clog << "[ DEBUG ] Brain copy constructor called" << std::endl;
-
   for (int i = 0; i < _kMaxCnt; i++)
     _ideas[i] = other._ideas[i];
 }
 
 Brain &Brain::operator=(Brain const &other) {
   std::clog << "[ DEBUG ] Brain assignment operator called" << std::endl;
-
   if (this == &other)
     return (*this);
   for (int i = 0; i < _kMaxCnt; i++)

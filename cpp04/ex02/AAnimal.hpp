@@ -5,7 +5,6 @@
 
 class AAnimal {
 public:
-  AAnimal(void);
   AAnimal(std::string const &type);
   virtual ~AAnimal(void);
 
@@ -14,10 +13,11 @@ public:
   virtual AAnimal *clone(void) const = 0;
 
 protected:
-  std::string _type;
   static const int _kWidth = 16;
+  std::string _type;
 
 private:
+  AAnimal(void);
   AAnimal(AAnimal const &other);
   AAnimal &operator=(AAnimal const &other);
 };

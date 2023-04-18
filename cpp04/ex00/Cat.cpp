@@ -9,13 +9,13 @@ Cat::Cat(void) : Animal(_kTypeCat) {
 }
 
 Cat::Cat(Cat const &other) : Animal(_kTypeCat) {
-  (void) other;
   std::clog << "[ DEBUG ] Cat copy constructor called" << std::endl;
+  (void)other;
 }
 
 Cat &Cat::operator=(Cat const &other) {
-  (void) other;
   std::clog << "[ DEBUG ] Cat assignment operator called" << std::endl;
+  (void)other;
   return (*this);
 }
 
@@ -24,6 +24,6 @@ Cat::~Cat(void) {
 }
 
 void Cat::makeSound(void) const {
-  std::cout << std::setw(_kWidth) << std::left << "Animal( cat )";
-  std::cout << " : MEOW~ MEOW~ MEOW~ " << std::endl;
+  std::cout << std::setw(_kWidth) << std::left << "Animal( cat )"
+            << " : MEOW~ MEOW~ MEOW~ " << std::endl;
 }

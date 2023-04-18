@@ -9,13 +9,13 @@ WrongCat::WrongCat(void) : WrongAnimal(_kTypeWrongCat) {
 }
 
 WrongCat::WrongCat(WrongCat const &other) : WrongAnimal(_kTypeWrongCat) {
-  (void) other;
   std::clog << "[ DEBUG ] WrongCat copy constructor called" << std::endl;
+  (void) other;
 }
 
 WrongCat &WrongCat::operator=(WrongCat const &other) {
-  (void) other;
   std::clog << "[ DEBUG ] WrongCat assignment operator called" << std::endl;
+  (void) other;
   return (*this);
 }
 

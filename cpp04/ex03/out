@@ -1,0 +1,89 @@
+
+=========================(  new MateriaSource()  )=========================
+
+>> IMateriaSource *src = new MateriaSource();
+	| MateriaSource     | [ DEBUG ] Default Constructor Called
+
+=========================(     learnMateria      )=========================
+
+>> src->learnMateria(new Ice());
+	| AMateria          | [ DEBUG ] String Constructor Called
+	| Ice               | [ DEBUG ] Default Constructor Called
+	| MateriaSource     | * Successed to learn new materia(ice) *
+
+>> src->learnMateria(new Cure());
+	| AMateria          | [ DEBUG ] String Constructor Called
+	| Cure              | [ DEBUG ] Default Constructor Called
+	| MateriaSource     | * Successed to learn new materia(cure) *
+
+=========================(  new Character("me")  )=========================
+
+>> ICharacter *me = new Character("me");
+	| Character         | [ DEBUG ] String Constructor Called
+
+=========================( createMateria,  equip )=========================
+
+>> AMateria *tmp;
+>> tmp = learnMateria("ice");
+	| MateriaSource     | Created a new Materia, ice
+	| AMateria          | [ DEBUG ] String Constructor Called
+	| Ice               | [ DEBUG ] Copy Constructor Called
+
+>> me->equip(tmp);
+	| Character         | ( me )    * The new item(ice)  successfully equipped *
+
+>> tmp = learnMateria("ice");
+	| MateriaSource     | Created a new Materia, cure
+	| AMateria          | [ DEBUG ] String Constructor Called
+	| Cure              | [ DEBUG ] Default Constructor Called
+	| Character         | 
+>> me->equip(tmp)
+( me )    * The new item(cure)  successfully equipped *
+
+=========================( new  Character("bob") )=========================
+
+>> ICharacter *bob = new Character("bob");
+	| Character         | [ DEBUG ] String Constructor Called
+
+=========================(          use          )=========================
+
+>> me->use(0, *bob);
+	| Character         | ( me )    * shoots an ice bolt at bob *
+
+>> me->use(1, *bob);
+	| Character         | ( me )    * heals bob's wounds *
+
+>> me->use(1, *bob);
+	| Character         | ( me )    * empty 2 inventory slot, nothing to use *
+
+=========================(        unequip        )=========================
+
+>> me->unequip(0);
+	| Character         | ( me )    * threw away the materia( ice ) *
+
+>> me->use(1, *bob);
+	| Character         | ( me )    * threw away the materia( cure ) *
+
+>> me->use(1, *bob);
+	| Character         | ( me )    * empty 2 inventory slot, nothing to unequip *
+
+=========================(        delete         )=========================
+
+>> delete bob;
+	| Character         | [ DEBUG ] Destructor Called
+
+>> delete me;
+	| Character         | [ DEBUG ] Destructor Called
+
+>> delete src;
+	| MateriaSource     | [ DEBUG ] Destructor Called
+	| Ice               | [ DEBUG ] Destructor Called
+	| AMateria          | [ DEBUG ] Destructor Called
+	| Cure              | [ DEBUG ] Destructor Called
+	| AMateria          | [ DEBUG ] Destructor Called
+
+>> delete unequiped;
+	| Ice               | [ DEBUG ] Destructor Called
+	| AMateria          | [ DEBUG ] Destructor Called
+	| Cure              | [ DEBUG ] Destructor Called
+	| AMateria          | [ DEBUG ] Destructor Called

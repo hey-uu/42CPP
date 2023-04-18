@@ -6,14 +6,15 @@
 class WrongAnimal {
 public:
   WrongAnimal(void);
-  WrongAnimal(std::string const &type);
   virtual ~WrongAnimal(void);
+
   void makeSound(void) const;
   std::string getType(void) const;
 
 protected:
-  std::string _type;
   static const int _kWidth = 25;
+  std::string _type;
+  WrongAnimal(std::string const &type);
 
 private:
   WrongAnimal(WrongAnimal const &other);

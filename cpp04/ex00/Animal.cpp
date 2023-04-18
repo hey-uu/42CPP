@@ -1,8 +1,8 @@
 #include "Animal.hpp"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-Animal::Animal(void) : _type("") {
+Animal::Animal(void) : _type("?") {
   std::clog << "[ DEBUG ] Animal default constructor called" << std::endl;
 }
 
@@ -16,7 +16,8 @@ Animal::Animal(Animal const &other) : _type(other._type) {
 
 Animal &Animal::operator=(Animal const &other) {
   std::clog << "[ DEBUG ] Animal assignment operator called" << std::endl;
-  _type = other._type;
+  if (this != &other)
+    _type = other._type;
   return (*this);
 }
 
@@ -25,11 +26,8 @@ Animal::~Animal(void) {
 }
 
 void Animal::makeSound(void) const {
-  if (_type.length() > 0)
-    std::cout << std::setw(_kWidth) << std::left << "Animal( " + _type + " )";
-  else
-    std::cout << std::setw(_kWidth) << std::left << "Animal( ? )";
-  std::cout << " : PUHAKHAKHAK! " << std::endl;
+  std::cout << std::setw(_kWidth) << std::left << "Animal( " + _type + " )"
+            << " : PUHAKHAKHAK! " << std::endl;
 }
 
 std::string Animal::getType(void) const { return (_type); }
