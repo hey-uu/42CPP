@@ -33,7 +33,6 @@ re:
 	make fclean
 	make all
 test:
-	make all
-	./ex00 &> out
+	make && ./ex00 &> out
 
 .PHONY: all clean fclean re bonus test

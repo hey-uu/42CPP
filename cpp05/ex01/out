@@ -1,0 +1,17 @@
+[ DEBUG ] Bureaucrat(string, int) constructor successfully called
+[ DEBUG ] Form(string, int, int) constructor successfully called
+>> FAIL << Crat couldn't sign Form0 because grade is too low to sign
+[ DEBUG ] Form(string, int, int) constructor successfully called
+>> FAIL << Crat couldn't sign Form1 because grade is too low to sign
+[ DEBUG ] Form(string, int, int) constructor successfully called
+>> FAIL << Crat couldn't sign Form2 because grade is too low to sign
+[ DEBUG ] Form(string, int, int) constructor successfully called
+[ DEBUG ] Form::beSigned() : the form is successfully signed
+>> SUCCESS << Crat signed Form3
+>> FAIL << Crat couldn't sign Form3 because the form is already signed by other bureaucrat
+[ DEBUG ] Form destructor called
+[ DEBUG ] Form(string, int, int) constructor successfully called
+[ DEBUG ] Form::beSigned() : the form is successfully signed
+>> SUCCESS << Crat signed Form4
+>> FAIL << Crat couldn't sign Form4 because the form is already signed by other bureaucrat
+[ DEBUG ] Form destructor called

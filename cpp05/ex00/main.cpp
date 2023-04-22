@@ -12,7 +12,7 @@ std::string &appendInt(std::string &str, int num)
 
 int main(void)
 {
-    Bureaucrat *people[10];
+    Bureaucrat *people[10] = {NULL, };
     int         cnt;
 
     for (int i = 0; i < 10; i++) {
@@ -20,13 +20,9 @@ int main(void)
         try {
             std::cout << "== Bureaucrat " << i << " ==" << std::endl;
             people[i] = new Bureaucrat(appendInt(str, i), i * 30);
-            std::cout << "[ INFO  ] Name  : " << people[i]->getName()
-                      << std::endl;
-            std::cout << "[ INFO  ] Grade : " << people[i]->getGrade()
-                      << std::endl;
+            std::cout << *people[i];
         }
         catch (std::exception const &e) {
-            people[i] = NULL;
             continue;
         }
         if (people[i]->getGrade() < 75) {

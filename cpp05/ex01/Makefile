@@ -1,19 +1,19 @@
-.DEFAULT_GOAL		=	all
+.DEFAULT_GOAL					=	all
 
 # PROGRAM NAME
-NAME				=	ex00
+NAME							=	ex00
 
 # COMPILE FLAGS
-CXX					=	c++
-CXXFLAGS			=	-Wall -Wextra -Werror -std=c++98
-CXXFLAGS_SANITIZE	=	-fsanitize=address -g3
+CXX								=	c++
+CXXFLAGS						=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS_SANITIZE				=	-fsanitize=address -g3
 ifdef SANITIZE
-CXXFLAGS			+=	$(CXXFLAGS_SANITIZE)
+CXXFLAGS						+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS				=	main.cpp Bureaucrat.cpp
-OBJS				=	$(SRCS:.cpp=.o)
+SRCS							=	main.cpp Bureaucrat.cpp Form.cpp
+OBJS							=	$(SRCS:.cpp=.o)
 
 # BUILD
 $(NAME): $(OBJS)
@@ -33,7 +33,6 @@ re:
 	make fclean
 	make all
 test:
-	make all
-	./ex00 &> out
+	make && ./ex00 &> out
 
 .PHONY: all clean fclean re bonus test

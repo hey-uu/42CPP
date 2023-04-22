@@ -1,8 +1,9 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 #include <sstream>
 
-std::string &appendInt(std::string &str, int num)
+std::string& appendInt(std::string& str, int num)
 {
     std::stringstream ss;
     ss << num;
@@ -12,53 +13,22 @@ std::string &appendInt(std::string &str, int num)
 
 int main(void)
 {
-    Bureaucrat *people[10];
-    int         cnt;
+    Bureaucrat* crat = new Bureaucrat("Crat", 80);
+    Form*       form[5];
 
-    for (int i = 0; i < 10; i++) {
-        std::string str = "person";
+    for (int i = 0; i < 5; i++) {
+        std::string form_name = "Form";
         try {
-            std::cout << "== Bureaucrat " << i << " ==" << std::endl;
-            people[i] = new Bureaucrat(appendInt(str, i), i * 30);
-            std::cout << "[ INFO  ] Name  : " << people[i]->getName()
+            form[i] = NULL;
+            form[i] = new Form(appendInt(form_name, i), i * 30 + 1, i * 30 + 3);
+        } catch (std::exception const& e) {
+            std::cerr << "[ ERROR ] failed at " << i << "th trials"
                       << std::endl;
-            std::cout << "[ INFO  ] Grade : " << people[i]->getGrade()
-                      << std::endl;
-        }
-        catch (std::exception const &e) {
-            people[i] = NULL;
             continue;
         }
-        if (people[i]->getGrade() < 75) {
-            try {
-                for (cnt = 1; cnt <= 150; cnt++) {
-                    people[i]->incrementGrade();
-                }
-            }
-            catch (std::exception const &e) {
-                std::cerr << "[ ERROR ] " << people[i]->getName()
-                          << ": failed to increment grade at " << cnt
-                          << "th trials" << std::endl;
-            }
-        }
-        else {
-            try {
-                for (cnt = 1; cnt <= 150; cnt++) {
-                    people[i]->decrementGrade();
-                }
-            }
-            catch (std::exception const &e) {
-                std::cerr << "[ ERROR ] " << people[i]->getName()
-                          << ": failed to increment grade at " << cnt
-                          << "th trials" << std::endl;
-            }
-        }
-    }
-    std::cout << "== Destruction ==" << std::endl;
-    for (int i = 0; i < 10; i++) {
-        std::cout << " >> " << i << ": " << std::flush;
-        if (people[i] == NULL)
-            std::cout << std::endl;
-        delete people[i];
+        if (crat->signForm(*form[i]) == false)
+            continue;
+        crat->signForm(*form[i]);
+        delete form[i];
     }
 }
