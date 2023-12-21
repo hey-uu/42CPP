@@ -35,8 +35,10 @@ Bureaucrat::Bureaucrat(Bureaucrat const& other)
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& other)
 {
-    Bureaucrat new_bureau(other);
-    *this = new_bureau;
+    if (this == &other)
+        return *this;
+    *(const_cast<std::string*>(&_name)) = other._name;
+    _grade = other._grade;
     return *this;
 }
 
