@@ -2,59 +2,86 @@
 #include <iostream>
 #include <sstream>
 
-std::string &appendInt(std::string &str, int num)
+void _test_constructor(std::string const name, int grade)
 {
-    std::stringstream ss;
-    ss << num;
-    str += ss.str();
-    return (str);
+    try {
+        Bureaucrat bureau = Bureaucrat(name, grade);
+        std::cout << bureau;
+        std::cerr << "> construction succeeded" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "> construction failed" << std::endl;
+    }
+}
+
+void _test_decrement_grade(std::string const& name, int grade)
+{
+    Bureaucrat bureau = Bureaucrat(name, grade);
+    try {
+        bureau.decrementGrade();
+        std::cout << bureau;
+        std::cerr << "> decrementation succeeded" << std::endl;
+    } catch (std::exception const& e) {
+        std::cerr << "> decrementation failed" << std::endl;
+    }
+}
+
+void _test_increment_grade(std::string const& name, int grade)
+{
+    Bureaucrat bureau = Bureaucrat(name, grade);
+
+    try {
+        bureau.incrementGrade();
+        std::cout << bureau;
+        std::cerr << "> incrementation succeeded" << std::endl;
+    } catch (std::exception const& e) {
+        std::cerr << "> incrementation failed" << std::endl;
+    }
+}
+
+void test1_constructor()
+{
+    std::cout << "========= test1 : constructor =========" << std::endl;
+    std::cout << "> (1) fail if grade is too high(grade < 1)" << std::endl;
+    _test_constructor("personA", 0);
+    _test_constructor("personB", -12);
+    std::cout << std::endl;
+    std::cout << "> (2) fail if grade is too low(grade > 150)" << std::endl;
+    _test_constructor("personC", 151);
+    _test_constructor("personD", 165);
+    std::cout << std::endl;
+    std::cout << "> (3) succeed if 1 <= grade <= 150" << std::endl;
+    _test_constructor("personE", 1);
+    _test_constructor("personF", 150);
+    _test_constructor("personG", 70);
+    std::cout << std::endl;
+}
+
+void test2_decrement_grade()
+{
+    std::cout << "========= test2 : decrement grade =========" << std::endl;
+    std::cout << "> (1) fail if grade = 150" << std::endl;
+    _test_decrement_grade("personA", 150);
+    std::cout << std::endl;
+    std::cout << "> (2) succeed if grade < 150" << std::endl;
+    _test_decrement_grade("personB", 149);
+    _test_decrement_grade("personC", 28);
+    std::cout << std::endl;
+}
+
+void test3_increment_grade() {
+    std::cout << "========= test3 : increment grade =========" << std::endl;
+    std::cout << "> (1) fail if grade = 1" << std::endl;
+    _test_increment_grade("personA", 1);
+    std::cout << std::endl;
+    std::cout << "> (2) succeed if grade > 1" << std::endl;
+    _test_increment_grade("personB", 2);
+    _test_increment_grade("personC", 100);
+    std::cout << std::endl;
 }
 
 int main(void)
 {
-    Bureaucrat *people[10] = {NULL, };
-    int         cnt;
-
-    for (int i = 0; i < 10; i++) {
-        std::string str = "person";
-        try {
-            std::cout << "== Bureaucrat " << i << " ==" << std::endl;
-            people[i] = new Bureaucrat(appendInt(str, i), i * 30);
-            std::cout << *people[i];
-        }
-        catch (std::exception const &e) {
-            continue;
-        }
-        if (people[i]->getGrade() < 75) {
-            try {
-                for (cnt = 1; cnt <= 150; cnt++) {
-                    people[i]->incrementGrade();
-                }
-            }
-            catch (std::exception const &e) {
-                std::cerr << "[ ERROR ] " << people[i]->getName()
-                          << ": failed to increment grade at " << cnt
-                          << "th trials" << std::endl;
-            }
-        }
-        else {
-            try {
-                for (cnt = 1; cnt <= 150; cnt++) {
-                    people[i]->decrementGrade();
-                }
-            }
-            catch (std::exception const &e) {
-                std::cerr << "[ ERROR ] " << people[i]->getName()
-                          << ": failed to increment grade at " << cnt
-                          << "th trials" << std::endl;
-            }
-        }
-    }
-    std::cout << "== Destruction ==" << std::endl;
-    for (int i = 0; i < 10; i++) {
-        std::cout << " >> " << i << ": " << std::flush;
-        if (people[i] == NULL)
-            std::cout << std::endl;
-        delete people[i];
-    }
+    test1_constructor();
+    test2_decrement_grade();
+    test3_increment_grade();
 }
