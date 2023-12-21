@@ -1,7 +1,7 @@
 .DEFAULT_GOAL					=	all
 
 # PROGRAM NAME
-NAME							=	ex00
+NAME							=	ex01
 
 # COMPILE FLAGS
 CXX								=	c++
@@ -33,6 +33,7 @@ re:
 	make fclean
 	make all
 test:
-	make && ./ex00 &> out
+	make
+	./ex01 &> out
 
 .PHONY: all clean fclean re bonus test
