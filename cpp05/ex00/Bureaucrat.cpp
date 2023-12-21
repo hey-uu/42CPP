@@ -1,4 +1,4 @@
-#include "Bureaucrat2.hpp"
+#include "Bureaucrat.hpp"
 #include <iomanip>
 
 void error_message(const char* message)
