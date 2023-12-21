@@ -38,7 +38,7 @@ void test1_create_form()
     _test_form_constructor("formB", 14, -132);
     std::cout << std::endl;
     std::cout
-        << "> (2) fail if grade is too low(sign grad or execution grade > 150)"
+        << "> (2) fail if grade is too low(sign grade or execution grade > 150)"
         << std::endl;
     _test_form_constructor("formC", 153, 132);
     _test_form_constructor("formD", 123, 165);
@@ -55,13 +55,13 @@ void test2_sign_form()
 {
     std::cout << "========= test2 : sign form =========" << std::endl;
     std::cout << "> (1) fail if sign grade < bureaucrat's grade" << std::endl;
-    _test_sign_form("bureauA", 70, "formA", 20, 50);
-    _test_sign_form("bureauA", 70, "formB", 20, 100);
+    _test_sign_form("signerA", 70, "formA", 20, 50);
+    _test_sign_form("signerA", 70, "formB", 20, 100);
     std::cout << std::endl;
     std::cout << "> (2) succeed if sign grade >= bureaucrat's grade"
               << std::endl;
-    _test_sign_form("bureauA", 70, "formC", 120, 50);
-    _test_sign_form("bureauA", 70, "formD", 120, 100);
+    _test_sign_form("signerA", 70, "formC", 120, 50);
+    _test_sign_form("signerA", 70, "formD", 120, 100);
     std::cout << std::endl;
 }
 
