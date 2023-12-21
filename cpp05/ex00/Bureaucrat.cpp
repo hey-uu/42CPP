@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include <iomanip>
 
-void error_message(const char* message)
+static void error_message(const char* message)
 {
     std::cerr << "[ ERROR ] " << message << std::endl;
 }
