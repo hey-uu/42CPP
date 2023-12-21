@@ -72,8 +72,6 @@ void Bureaucrat::decrementGrade()
         error_message(e.what());
         throw;
     }
-
-    std::string const& msg = std::string("hello ") + std::string("abc");
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException(
