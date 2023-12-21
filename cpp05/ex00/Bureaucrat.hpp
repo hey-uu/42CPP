@@ -14,18 +14,6 @@ private:
 
     void checkGradeInRange() const;
 
-public:
-    Bureaucrat();
-    Bureaucrat(std::string const& name, int grade);
-    Bureaucrat(Bureaucrat const& other);
-    Bureaucrat& operator=(Bureaucrat const& other);
-    ~Bureaucrat();
-
-    std::string const& getName() const;
-    int                getGrade() const;
-    void               incrementGrade();
-    void               decrementGrade();
-
     class GradeTooHighException : public std::exception
     {
     private:
@@ -47,6 +35,18 @@ public:
         ~GradeTooLowException() throw();
         const char* what() const throw();
     };
+
+public:
+    Bureaucrat();
+    Bureaucrat(std::string const& name, int grade);
+    Bureaucrat(Bureaucrat const& other);
+    Bureaucrat& operator=(Bureaucrat const& other);
+    ~Bureaucrat();
+
+    std::string const& getName() const;
+    int                getGrade() const;
+    void               incrementGrade();
+    void               decrementGrade();
 };
 
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& bureau);
