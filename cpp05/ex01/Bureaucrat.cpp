@@ -2,11 +2,6 @@
 #include "Form.hpp"
 #include <iomanip>
 
-static void error_message(const char* message)
-{
-    std::cerr << "[ ERROR ] " << message << std::endl;
-}
-
 void Bureaucrat::checkGradeInRange() const
 {
     if (_grade > 150)
@@ -24,7 +19,7 @@ Bureaucrat::Bureaucrat(std::string const& name, int grade)
     try {
         checkGradeInRange();
     } catch (std::exception const& e) {
-        error_message(e.what());
+        std::cerr << "construction failed because " << e.what() << std::endl;
         throw;
     }
 }
@@ -61,8 +56,9 @@ void Bureaucrat::incrementGrade()
         _grade--;
         checkGradeInRange();
     } catch (std::exception const& e) {
-        error_message(e.what());
-        throw;
+        _grade++;
+        std::cerr << "failed to increment grade because " << e.what()
+                  << std::endl;
     }
 }
 
@@ -72,8 +68,9 @@ void Bureaucrat::decrementGrade()
         _grade++;
         checkGradeInRange();
     } catch (std::exception const& e) {
-        error_message(e.what());
-        throw;
+        _grade--;
+        std::cerr << "failed to decrement grade because " << e.what()
+                  << std::endl;
     }
 }
 
@@ -84,14 +81,13 @@ void Bureaucrat::signForm(Form& form)
         std::cout << _name << " signed " << form.getName() << std::endl;
     } catch (std::exception const& e) {
         std::cout << _name << " couldn't sign " << form.getName() << " because "
-                  << "the bureaucrat's grade, " << _grade << " is lower than "
-                  << "the form's grade, " << form.getSignGrade() << std::endl;
+                  << e.what() << std::endl;
     }
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException(
     std::string const& name) throw()
-    : _errmsg("Grade is too High(" + name + ")")
+    : _errmsg(name + "'s grade is too high")
 {
 }
 
@@ -104,7 +100,7 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(
     std::string const& name) throw()
-    : _errmsg("Grade is too Low(" + name + ")")
+    : _errmsg(name + "'s grade is too low")
 {
 }
 
