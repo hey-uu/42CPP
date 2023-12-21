@@ -16,26 +16,17 @@ void _test_constructor(std::string const name, int grade)
 void _test_decrement_grade(std::string const& name, int grade)
 {
     Bureaucrat bureau = Bureaucrat(name, grade);
-    try {
-        bureau.decrementGrade();
-        std::cout << bureau;
-        std::cerr << "> decrementation succeeded" << std::endl;
-    } catch (std::exception const& e) {
-        std::cerr << "> decrementation failed" << std::endl;
-    }
+    std::cout << "before" << std::endl << bureau;
+    bureau.decrementGrade();
+    std::cout << "after" << std::endl << bureau;
 }
 
 void _test_increment_grade(std::string const& name, int grade)
 {
     Bureaucrat bureau = Bureaucrat(name, grade);
-
-    try {
-        bureau.incrementGrade();
-        std::cout << bureau;
-        std::cerr << "> incrementation succeeded" << std::endl;
-    } catch (std::exception const& e) {
-        std::cerr << "> incrementation failed" << std::endl;
-    }
+    std::cout << "before" << std::endl << bureau;
+    bureau.incrementGrade();
+    std::cout << "after" << std::endl << bureau;
 }
 
 void test1_constructor()
@@ -68,7 +59,8 @@ void test2_decrement_grade()
     std::cout << std::endl;
 }
 
-void test3_increment_grade() {
+void test3_increment_grade()
+{
     std::cout << "========= test3 : increment grade =========" << std::endl;
     std::cout << "> (1) fail if grade = 1" << std::endl;
     _test_increment_grade("personA", 1);
