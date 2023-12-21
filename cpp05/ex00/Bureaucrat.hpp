@@ -3,37 +3,50 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <string>
 
 class Bureaucrat
 {
+private:
+    std::string const _name;
+    int               _grade;
+    int static const _kLowestGrade = 150;
+    int static const _kHighestGrade = 1;
+
+    void checkGradeInRange() const;
+
 public:
     Bureaucrat();
-    Bureaucrat(std::string const& name, int const grade);
+    Bureaucrat(std::string const& name, int grade);
+    Bureaucrat(Bureaucrat const& other);
+    Bureaucrat& operator=(Bureaucrat const& other);
     ~Bureaucrat();
-    Bureaucrat(Bureaucrat const& rhs);
-    Bureaucrat&        operator=(Bureaucrat const& rhs);
+
     std::string const& getName() const;
     int                getGrade() const;
     void               incrementGrade();
     void               decrementGrade();
 
-    class GradeTooHighException : public std::domain_error
+    class GradeTooHighException : public std::exception
     {
+    private:
+        std::string const _errmsg;
+
     public:
-        GradeTooHighException();
-    };
-    class GradeTooLowException : public std::domain_error
-    {
-    public:
-        GradeTooLowException();
+        GradeTooHighException(std::string const& name) throw();
+        ~GradeTooHighException() throw();
+        const char* what() const throw();
     };
 
-private:
-    std::string const _name;
-    int               _grade;
-    static const int  _kLowestGrade = 150;
-    static const int  _kHighestGrade = 1;
+    class GradeTooLowException : public std::exception
+    {
+    private:
+        std::string const _errmsg;
+
+    public:
+        GradeTooLowException(std::string const& bureau) throw();
+        ~GradeTooLowException() throw();
+        const char* what() const throw();
+    };
 };
 
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& bureau);
