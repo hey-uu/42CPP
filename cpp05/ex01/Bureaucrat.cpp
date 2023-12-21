@@ -1,54 +1,49 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include <iomanip>
-#include <iostream>
-#include <sstream>
 
-Bureaucrat::Bureaucrat() : _name("?"), _grade(_kLowestGrade)
+static void error_message(const char* message)
 {
-    std::clog << "[ DEBUG ] Bureaucrat default constructor called" << std::endl;
+    std::cerr << "[ ERROR ] " << message << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const& name, int const grade) throw(
-    std::exception)
+void Bureaucrat::checkGradeInRange() const
+{
+    if (_grade > 150)
+        throw GradeTooLowException(_name);
+    else if (_grade < 1)
+        throw GradeTooHighException(_name);
+}
+
+// essenstial
+Bureaucrat::Bureaucrat() : _name("none"), _grade(150) {}
+
+Bureaucrat::Bureaucrat(std::string const& name, int grade)
     : _name(name), _grade(grade)
 {
     try {
-        if (_isLeftLower(_grade, _kLowestGrade))
-            throw Bureaucrat::GradeTooLowException();
-        else if (_isLeftHigher(_grade, _kHighestGrade))
-            throw Bureaucrat::GradeTooHighException();
-    } catch (const std::exception& e) {
-        std::cerr << "[ ERROR ] Bureaucrat(string, int) constructor : tried to "
-                     "initialize as "
-                  << *this << " : " << e.what() << std::endl;
+        checkGradeInRange();
+    } catch (std::exception const& e) {
+        error_message(e.what());
         throw;
     }
-    std::clog
-        << "[ DEBUG ] Bureaucrat(string, int) constructor successfully called"
-        << std::endl;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const& rhs)
-    : _name(rhs._name), _grade(rhs._grade)
+Bureaucrat::Bureaucrat(Bureaucrat const& other)
+    : _name(other._name), _grade(other._grade)
 {
-    std::clog << "[ DEBUG ] Bureaucrat copy constructor called" << std::endl;
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs)
+Bureaucrat& Bureaucrat::operator=(Bureaucrat const& other)
 {
-    if (this != &rhs) {
-        *(const_cast<std::string*>(&_name)) = rhs._name;
-        _grade = rhs._grade;
-    }
-    std::clog << "[ DEBUG ] Bureaucrat assignment operator called" << std::endl;
+    if (this == &other)
+        return *this;
+    *(const_cast<std::string*>(&_name)) = other._name;
+    _grade = other._grade;
     return *this;
 }
 
-Bureaucrat::~Bureaucrat()
-{
-    std::clog << "[ DEBUG ] Bureaucrat destructor called" << std::endl;
-}
+Bureaucrat::~Bureaucrat() {}
 
 std::string const& Bureaucrat::getName() const
 {
@@ -60,81 +55,74 @@ int Bureaucrat::getGrade() const
     return _grade;
 }
 
-std::string Bureaucrat::getStrGrade() const
-{
-    std::stringstream ss;
-    ss << _grade;
-    return ss.str();
-}
-
-void Bureaucrat::incrementGrade() throw(std::exception)
+void Bureaucrat::incrementGrade()
 {
     try {
-        if (_grade == _kHighestGrade)
-            throw Bureaucrat::GradeTooHighException();
-    } catch (const std::exception& e) {
-        std::cerr << "[ ERROR ] incrementGrade : " << e.what() << std::endl;
+        _grade--;
+        checkGradeInRange();
+    } catch (std::exception const& e) {
+        error_message(e.what());
         throw;
     }
-    _grade--;
-    std::clog << "[ DEBUG ] Bureaucrat's grade is incremented to " << _grade
-              << std::endl;
 }
 
-void Bureaucrat::decrementGrade() throw(std::exception)
+void Bureaucrat::decrementGrade()
 {
     try {
-        if (_grade == _kLowestGrade)
-            throw Bureaucrat::GradeTooLowException();
-    } catch (const std::exception& e) {
-        std::cerr << "[ ERROR ] decrementGrade : " << e.what() << std::endl;
+        _grade++;
+        checkGradeInRange();
+    } catch (std::exception const& e) {
+        error_message(e.what());
         throw;
     }
-    _grade++;
-    std::clog << "[ DEBUG ] Bureaucrat's grade is decremented to " << _grade
-              << std::endl;
 }
 
-bool Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(Form& form)
 {
     try {
         form.beSigned(*this);
-        std::cout << ">> SUCCESS << " << _name << " signed " << form.getName()
-                  << std::endl;
-        return true;
+        std::cout << _name << " signed " << form.getName() << std::endl;
     } catch (std::exception const& e) {
-        std::cout << ">> FAIL << " << _name << " couldn't sign "
-                  << form.getName() << " because " << e.what() << std::endl;
+        std::cout << _name << " couldn't sign " << form.getName() << " because "
+                  << "the bureaucrat's grade, " << _grade << " is lower than "
+                  << "the form's grade, " << form.getSignGrade() << std::endl;
     }
-    return false;
-};
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException(
+    std::string const& name) throw()
+    : _errmsg("Grade is too High(" + name + ")")
+{
+}
+
+Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return _errmsg.c_str();
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(
+    std::string const& name) throw()
+    : _errmsg("Grade is too Low(" + name + ")")
+{
+}
+
+Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return _errmsg.c_str();
+}
 
 std::ostream& operator<<(std::ostream& os, Bureaucrat const& bureau)
 {
-    os << " ( "
-       << "type: Bureaucrat | "
-       << "name: " + bureau.getName() << " | "
-       << "grade: " + bureau.getStrGrade() << " ) ";
-    return (os);
-}
-
-// private
-Bureaucrat::GradeTooHighException::GradeTooHighException()
-    : std::domain_error("Grade Too High")
-{
-}
-
-Bureaucrat::GradeTooLowException::GradeTooLowException()
-    : std::domain_error("Grade Too Low")
-{
-}
-
-bool Bureaucrat::_isLeftLower(int const grade_a, int const grade_b)
-{
-    return (grade_a > grade_b);
-}
-
-bool Bureaucrat::_isLeftHigher(int const grade_a, int const grade_b)
-{
-    return (grade_a < grade_b);
+    os << "[ INFO  ] " << std::setw(10) << std::left << "type"
+       << " | " << std::setw(10) << std::left << "name"
+       << " | " << std::setw(10) << std::left << "grade"
+       << " | " << std::endl;
+    os << "          " << std::setw(10) << std::left << "Bureaucrat"
+       << " | " << std::setw(10) << std::left << bureau.getName() << " | "
+       << std::setw(10) << std::left << bureau.getGrade() << " | " << std::endl;
+    return os;
 }
