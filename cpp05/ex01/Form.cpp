@@ -2,11 +2,6 @@
 #include "Bureaucrat.hpp"
 #include <iomanip>
 
-static void error_message(const char* message)
-{
-    std::cerr << "[ ERROR ] " << message << std::endl;
-}
-
 void Form::checkGradeInRange()
 {
     if (_sign_grade > 150 || _exec_grade > 150)
@@ -27,7 +22,7 @@ Form::Form(std::string const& name, int sign_grade, int exec_grade)
     try {
         checkGradeInRange();
     } catch (std::exception const& e) {
-        error_message(e.what());
+        std::cerr << "construction failed because " << e.what() << std::endl;
         throw;
     }
 }
@@ -72,22 +67,16 @@ int Form::getExecutionGrade() const
 
 void Form::beSigned(Bureaucrat const& bureau)
 {
-    try {
-        // if (_is_signed == true)
-            // return;
-        const int bureau_grade = bureau.getGrade();
-        if (_sign_grade < bureau_grade)
-            throw GradeTooLowException(bureau.getName());
-        _is_signed = true;
-    } catch (std::exception const& e) {
-        error_message(e.what());
-        throw;
-    }
+    // if (_is_signed == true)
+    // return;
+    if (_sign_grade < bureau.getGrade())
+        throw GradeTooLowException(bureau.getName());
+    _is_signed = true;
 }
 
 Form::GradeTooHighException::GradeTooHighException(
     std::string const& name) throw()
-    : _errmsg("Grade is too high(" + name + ")")
+    : _errmsg(name + "'s grade is too high")
 {
 }
 
@@ -100,7 +89,7 @@ const char* Form::GradeTooHighException::what() const throw()
 
 Form::GradeTooLowException::GradeTooLowException(
     std::string const& name) throw()
-    : _errmsg("Grade is too Low(" + name + ")")
+    : _errmsg(name + "'s grade is too low")
 {
 }
 
@@ -120,10 +109,10 @@ std::ostream& operator<<(std::ostream& os, Form const& form)
        << " | " << std::setw(10) << std::left << "exec grade"
        << " | " << std::endl;
     os << "          " << std::setw(10) << std::left << "Form"
-       << " | " << std::setw(10) << std::left << form.getName() 
-       << " | " << std::setw(10) << std::left << form.getIsSigned() 
-       << " | " << std::setw(10) << std::left << form.getSignGrade() 
-       << " | " << std::setw(10) << std::left << form.getExecutionGrade() << " | "
+       << " | " << std::setw(10) << std::left << form.getName() << " | "
+       << std::setw(10) << std::left << form.getIsSigned() << " | "
+       << std::setw(10) << std::left << form.getSignGrade() << " | "
+       << std::setw(10) << std::left << form.getExecutionGrade() << " | "
        << std::endl;
     return os;
 }
