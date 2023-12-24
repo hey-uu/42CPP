@@ -14,13 +14,12 @@ private:
 
     ScalarData();
 
-
-    char   strToChar(std::string const& input);
-    int    strToInt(std::string const& input);
-    float  strToFloat(std::string input);
-    float  strToFloatPseudoLiteral(std::string const& input);
-    double strToDouble(std::string input);
-    double strToDoublePseudoLiteral(std::string const& input);
+    static char   strToChar(std::string const& input);
+    static int    strToInt(std::string const& input);
+    static float  strToFloat(std::string input);
+    static float  strToFloatPseudoLiteral(std::string const& input);
+    static double strToDouble(std::string input);
+    static double strToDoublePseudoLiteral(std::string const& input);
 
     enum e_type
     {
