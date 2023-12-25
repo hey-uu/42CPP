@@ -5,8 +5,7 @@ NAME							=	ex01
 
 # COMPILE FLAGS
 CXX								=	c++
-CXXFLAGS						=	-Wall -Wextra -Werror
-# -std=c++98
+CXXFLAGS						=	-Wall -Wextra -Werror -std=c++98
 CXXFLAGS_SANITIZE				=	-fsanitize=address -g3
 ifdef SANITIZE
 CXXFLAGS						+=	$(CXXFLAGS_SANITIZE)
