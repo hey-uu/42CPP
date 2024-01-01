@@ -34,6 +34,6 @@ re:
 	make all
 test:
 	make
-	./ex00 &> out.txt
+	./$(NAME) &> out.txt
 
 .PHONY: all clean fclean re bonus test
