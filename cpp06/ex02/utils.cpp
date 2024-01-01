@@ -33,19 +33,19 @@ void identify(Base* p)
 void identify(Base& p)
 {
     try {
-        dynamic_cast<A&>(p);
+        (void)dynamic_cast<A&>(p);
         std::cout << "the reference is type A" << std::endl;
         return;
     } catch (std::bad_cast& e) {
     }
     try {
-        dynamic_cast<B&>(p);
+        (void)dynamic_cast<B&>(p);
         std::cout << "the reference is type B" << std::endl;
         return;
     } catch (std::bad_cast& e) {
     }
     try {
-        dynamic_cast<C&>(p);
+        (void)dynamic_cast<C&>(p);
         std::cout << "the reference is type C" << std::endl;
         return;
     } catch (std::bad_cast& e) {
