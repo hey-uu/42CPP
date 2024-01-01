@@ -199,12 +199,11 @@ std::string ScalarConverter::ScalarData::floatToStr()
             break;
     }
     std::stringstream ss;
+    ss << _f_data;
     if (_type != FLOAT_PSEUDO && _type != DOUBLE_PSEUDO
-        && std::floor(_f_data) == _f_data)
-        ss << _f_data << ".0f";
-    else
-        ss << _f_data << 'f';
-
+        && ss.str().find('.') == std::string::npos)
+        ss << ".0";
+    ss << 'f';
     return ss.str();
 }
 
@@ -228,10 +227,9 @@ std::string ScalarConverter::ScalarData::doubleToStr()
             return "impossible";
     }
     std::stringstream ss;
+    ss << _d_data;
     if (_type != FLOAT_PSEUDO && _type != DOUBLE_PSEUDO
-        && std::floor(_d_data) == _d_data)
-        ss << _d_data << ".0";
-    else
-        ss << _d_data;
+        && ss.str().find('.') == std::string::npos)
+        ss << ".0";
     return ss.str();
 }
