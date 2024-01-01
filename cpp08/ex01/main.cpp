@@ -19,12 +19,12 @@ int main()
 
     // test2: addNumber using iterator
     std::cout << "\n====== test2: addNumber using iterator ======" << std::endl;
-    int              myints[] = {16, 2, 77, 29};
+    int              myints[] = {16, 2, 77, 29, -20, 5};
     std::vector<int> intvec(myints, myints + sizeof(myints) / sizeof(int));
-    Span             sp2 = Span(4);
+    Span             sp2 = Span(6);
     sp2.addNumber(intvec.begin(), intvec.end());
-    std::cout << sp2.shortestSpan() << std::endl; // 13
-    std::cout << sp2.longestSpan() << std::endl;  // 75
+    std::cout << sp2.shortestSpan() << std::endl; // 3
+    std::cout << sp2.longestSpan() << std::endl;  // 97
 
     // test3: Span addNumber
     std::cout << "\n====== test3: addNumber : Span is full ======" << std::endl;
