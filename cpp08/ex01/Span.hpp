@@ -1,8 +1,8 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#include <vector>
 #include <iterator>
+#include <vector>
 
 class Span
 {
@@ -33,9 +33,11 @@ void Span::addNumber(InputIterator first, InputIterator last)
     const int len = std::distance(first, last);
     if (_used_size + len > _size)
         throw std::runtime_error("Span is full");
-    std::vector<int> temp(first, last);
-    sort(temp.begin(), temp.end());
-    _numbers.insert(_numbers.begin() + _used_size, temp.begin(), temp.end());
+    for (InputIterator num_it = first; num_it != last; num_it++) {
+        std::vector<int>::iterator pos_it
+            = std::upper_bound(_numbers.begin(), _numbers.end(), *num_it);
+        _numbers.insert(pos_it, *num_it);
+    }
     _used_size += len;
 }
 
