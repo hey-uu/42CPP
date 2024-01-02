@@ -7,15 +7,18 @@
 
 class BitcoinExchange
 {
-
 private:
+    static BitcoinExchange*  database;
+    static const std::string price_file;
+
     struct BitcoinData
     {
         std::string line;
-        std::string date;
-        int         splitted_date[3];
+        std::string date_str;
+        int         date_arr[3];
         float       amount;
-        char        status;
+        double      price;
+        int         status;
     };
 
     enum Status
@@ -30,19 +33,20 @@ private:
     std::list<BitcoinData>        _amounts;
 
     BitcoinExchange();
-    void loadRates();
-    void loadAmounts(std::string const& filename);
-    bool isValidDate(std::string const& date, int splitted_date[3]) const;
-
-public:
-    static const std::string price_file;
-
-    BitcoinExchange(std::string const& filename);
     BitcoinExchange(BitcoinExchange const& other);
     BitcoinExchange& operator=(BitcoinExchange const& other);
     ~BitcoinExchange();
 
-    void printPrices() const;
+    static bool splitDateStr(std::string const& date_str, int date_arr[3]);
+    static bool isLeapYear(int year);
+    static bool isValidDate(int splitted_date[3]);
+    bool        isValidPrice(BitcoinData& data);
+    void        loadRates();
+
+public:
+    static BitcoinExchange& getInstance();
+    void                    loadAmounts(std::string const& filename);
+    void                    printPrices() const;
 };
 
 #endif
