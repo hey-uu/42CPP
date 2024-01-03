@@ -7,7 +7,8 @@ class RPN
 {
 private:
     static std::stack<int> operands;
-    static void calculate(char c);
+    static void            calculate(char c);
+
 public:
     static double calculator(const std::string& expression);
 };
