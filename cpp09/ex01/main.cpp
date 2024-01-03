@@ -19,8 +19,8 @@ int main(int argc, char* argv[])
         std::cout << "Need input" << std::endl;
         return 1;
     }
+    std::string input = parseInput(argc - 1, argv + 1);
     try {
-        std::string input = parseInput(argc - 1, argv + 1);
         std::cout << RPN::calculator(input) << std::endl;
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
