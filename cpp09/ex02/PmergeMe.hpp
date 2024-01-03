@@ -15,8 +15,8 @@ private:
     static double           _deque_sort_time;
 
     PmergeMe();
-    PmergeMe(const PmergeMe& other);
-    PmergeMe& operator=(const PmergeMe& other);
+    PmergeMe(PmergeMe const& other);
+    PmergeMe& operator=(PmergeMe const& other);
     ~PmergeMe();
 
     // utils
