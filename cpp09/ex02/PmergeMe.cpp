@@ -52,13 +52,13 @@ void PmergeMe::parseInput(std::string const& input)
     _input = "";
     _vector.clear();
     _deque.clear();
-    while (!iss.eof()) {
-        if (!(iss >> num))
-            throw std::runtime_error("Invalid input");
+    while (iss >> num) {
         _input += intToStr(num) + " ";
         _vector.push_back(num);
         _deque.push_back(num);
     }
+    if (!(iss.eof()))
+        throw std::runtime_error("Invalid input");
 }
 
 void PmergeMe::measureRunTime(void (*sort)(), double& time)
