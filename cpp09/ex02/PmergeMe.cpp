@@ -11,7 +11,10 @@ double           PmergeMe::_deque_sort_time = 0;
 
 PmergeMe::PmergeMe() {}
 
-PmergeMe::PmergeMe(PmergeMe const& other) {}
+PmergeMe::PmergeMe(PmergeMe const& other)
+{
+    (void)other;
+}
 
 PmergeMe& PmergeMe::operator=(PmergeMe const& other)
 {
