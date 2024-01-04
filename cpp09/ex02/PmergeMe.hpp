@@ -22,10 +22,13 @@ private:
     // utils
     static std::string intToStr(int num);
     static std::string vectorToStr(std::vector<int> const& vector);
-    static void        parseInput(std::string const& input);
-    static void        vectorSort();
-    static void        dequeSort();
-    static void        printResult();
+    static void        measureRunTime(void (*sort)(), double& time);
+
+    // main flow
+    static void parseInput(std::string const& input);
+    static void vectorSort();
+    static void dequeSort();
+    static void printResult();
 
 public:
     static void sort(std::string const& input);

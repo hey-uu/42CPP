@@ -1,5 +1,7 @@
 #include "PmergeMe.hpp"
+#include <ctime>
 #include <sstream>
+#include <iomanip>
 
 std::string      PmergeMe::_input;
 std::vector<int> PmergeMe::_vector;
@@ -56,32 +58,34 @@ void PmergeMe::parseInput(std::string const& input)
     }
 }
 
-void PmergeMe::vectorSort() 
+void PmergeMe::measureRunTime(void (*sort)(), double& time)
 {
-
+    clock_t start = clock();
+    sort();
+    clock_t end = clock();
+    time = (end - start) / (static_cast<double>(CLOCKS_PER_SEC) / 1000000);
 }
 
-void PmergeMe::dequeSort()
-{
+void PmergeMe::vectorSort() {}
 
-}
+void PmergeMe::dequeSort() {}
 
 void PmergeMe::printResult()
 {
     std::cout << "Before: " << _input << std::endl;
     std::cout << "After: " << vectorToStr(_vector) << std::endl;
     std::cout << "Time to process a range of " << _vector.size()
-              << " elements with std::vector<int> : " << _vector_sort_time
-              << " us" << std::endl;
+              << " elements with std::vector<int> : " << std::setprecision(4) << _vector_sort_time
+              << " µs" << std::endl;
     std::cout << "Time to process a range of " << _deque.size()
-              << " elements with std::deque<int> : " << _deque_sort_time
-              << " us" << std::endl;
+              << " elements with std::deque<int> : " << std::setprecision(4) << _deque_sort_time
+              << " µs" << std::endl;
 }
 
 void PmergeMe::sort(std::string const& input)
 {
     parseInput(input);
-    vectorSort();
-    dequeSort();
+    measureRunTime(&vectorSort, _vector_sort_time);
+    measureRunTime(&dequeSort, _deque_sort_time);
     printResult();
 }
