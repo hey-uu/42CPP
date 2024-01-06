@@ -12,7 +12,7 @@ CXXFLAGS						+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS							=	main.cpp PmergeMe.cpp
+SRCS							=	main.cpp PmergeMe.cpp PmergeMeSort.cpp
 OBJS							=	$(SRCS:.cpp=.o)
 
 # BUILD
