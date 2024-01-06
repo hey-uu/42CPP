@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <cassert>
 #include <ctime>
 #include <iomanip>
 #include <sstream>
@@ -35,9 +36,11 @@ std::string PmergeMe::intToStr(int num)
 std::string PmergeMe::vectorToStr(std::vector<int> const& vector)
 {
     std::string str;
+    int         prev = vector[0];
 
     for (std::vector<int>::const_iterator it = vector.begin();
          it != vector.end(); it++) {
+        assert(it == vector.begin() || prev < *it);
         str += intToStr(*it);
         str += " ";
     }
@@ -75,8 +78,7 @@ void PmergeMe::measureRunTime(
 // {
 //     std::string str;
 
-//     for (std::deque<int>::const_iterator it = deque.begin(); it !=
-//     deque.end();
+//     for (std::deque<int>::const_iterator it = deque.begin(); it != deque.end();
 //          it++) {
 //         str += PmergeMe::intToStr(*it);
 //         str += " ";
