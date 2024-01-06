@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 #include <ctime>
-#include <sstream>
 #include <iomanip>
+#include <sstream>
 
 std::string      PmergeMe::_input;
 std::vector<int> PmergeMe::_vector;
@@ -61,34 +61,46 @@ void PmergeMe::parseInput(std::string const& input)
         throw std::runtime_error("Invalid input");
 }
 
-void PmergeMe::measureRunTime(void (*sort)(), double& time)
+template <typename Container>
+void PmergeMe::measureRunTime(
+    typename Func<Container>::sort fct, Container& seq, double& time)
 {
     clock_t start = clock();
-    sort();
+    fct(seq, seq.size());
     clock_t end = clock();
     time = (end - start) / (static_cast<double>(CLOCKS_PER_SEC) / 1000000);
 }
 
-void PmergeMe::vectorSort() {}
+// std::string PmergeMe::dequeToStr(std::deque<int> const& deque)
+// {
+//     std::string str;
 
-void PmergeMe::dequeSort() {}
+//     for (std::deque<int>::const_iterator it = deque.begin(); it !=
+//     deque.end();
+//          it++) {
+//         str += PmergeMe::intToStr(*it);
+//         str += " ";
+//     }
+//     return str;
+// }
 
 void PmergeMe::printResult()
 {
     std::cout << "Before: " << _input << std::endl;
     std::cout << "After: " << vectorToStr(_vector) << std::endl;
+    // std::cout << "After: " << dequeToStr(_deque) << std::endl;
     std::cout << "Time to process a range of " << _vector.size()
-              << " elements with std::vector<int> : " << std::setprecision(4) << _vector_sort_time
-              << " µs" << std::endl;
+              << " elements with std::vector<int> : " << std::setprecision(4)
+              << _vector_sort_time << " µs" << std::endl;
     std::cout << "Time to process a range of " << _deque.size()
-              << " elements with std::deque<int> : " << std::setprecision(4) << _deque_sort_time
-              << " µs" << std::endl;
+              << " elements with std::deque<int> : " << std::setprecision(4)
+              << _deque_sort_time << " µs" << std::endl;
 }
 
 void PmergeMe::sort(std::string const& input)
 {
     parseInput(input);
-    measureRunTime(&vectorSort, _vector_sort_time);
-    measureRunTime(&dequeSort, _deque_sort_time);
+    measureRunTime(&vectorSort, _vector, _vector_sort_time);
+    measureRunTime(&dequeSort, _deque, _deque_sort_time);
     printResult();
 }
