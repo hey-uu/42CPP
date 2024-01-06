@@ -9,17 +9,26 @@ size_t PmergeMe::jacobisthalNumber(size_t n)
     return jacobisthalNumber(n - 1) + 2 * jacobisthalNumber(n - 2);
 }
 
-void PmergeMe::vectorComparePairs(std::vector<int>& seq, size_t len)
+void PmergeMe::vectorSwap(std::vector<int>& seq, size_t idx1, size_t idx2)
 {
     size_t total_half = seq.size() / 2;
+
+    std::swap(seq[idx1], seq[idx2]);
+    if (idx2 >= total_half)
+        return;
+    for (size_t start = total_half; start > idx2; start /= 2)
+    {
+        vectorSwap(seq, start + idx1, start + idx2);
+    }
+}
+
+void PmergeMe::vectorComparePairs(std::vector<int>& seq, size_t len)
+{
     size_t half = len / 2;
 
     for (size_t i = 0; i < half; i++) {
-        if (seq[i] < seq[i + half]) {
-            std::swap(seq[i], seq[i + half]);
-            for (size_t intvl = total_half; intvl > half; intvl /= 2)
-                std::swap(seq[i + intvl], seq[i + half + intvl]);
-        }
+        if (seq[i] < seq[i + half])
+            vectorSwap(seq, i, i + half);
     }
 }
 
@@ -28,15 +37,13 @@ void PmergeMe::vectorEraseInsertElem(
     size_t insert_pos)
 {
     int    val = seq[erase_pos];
-    size_t half = level_len / 2;
     size_t total_half = seq.size() / 2;
 
     seq.erase(seq.begin() + erase_pos);
     seq.insert(seq.begin() + insert_pos, val);
-    for (size_t intvl = total_half; intvl > half; intvl /= 2) {
-        val = seq[erase_pos + intvl];
-        seq.erase(seq.begin() + erase_pos + intvl);
-        seq.insert(seq.begin() + insert_pos + intvl, val);
+    for (size_t start = total_half; start > erase_pos; start /= 2) {
+        val = seq[start + erase_pos];
+        vectorEraseInsertElem(seq, level_len, start + erase_pos, start + insert_pos);
     }
 }
 
@@ -81,33 +88,41 @@ void PmergeMe::vectorBinaryInsert(std::vector<int>& seq, size_t level_len)
     }
 }
 
-void PmergeMe::dequeComparePairs(std::deque<int>& seq, size_t len)
+void PmergeMe::dequeSwap(std::deque<int>& seq, size_t idx1, size_t idx2)
 {
     size_t total_half = seq.size() / 2;
+
+    std::swap(seq[idx1], seq[idx2]);
+    if (idx2 >= total_half)
+        return;
+    for (size_t start = total_half; start > idx2; start /= 2)
+    {
+        dequeSwap(seq, start + idx1, start + idx2);
+    }
+}
+
+void PmergeMe::dequeComparePairs(std::deque<int>& seq, size_t len)
+{
     size_t half = len / 2;
 
     for (size_t i = 0; i < half; i++) {
-        if (seq[i] < seq[i + half]) {
-            std::swap(seq[i], seq[i + half]);
-            for (size_t intvl = total_half; intvl > half; intvl /= 2)
-                std::swap(seq[i + intvl], seq[i + half + intvl]);
-        }
+        if (seq[i] < seq[i + half])
+            dequeSwap(seq, i, i + half);
     }
 }
 
 void PmergeMe::dequeEraseInsertElem(
-    std::deque<int>& seq, size_t level_len, size_t erase_pos, size_t insert_pos)
+    std::deque<int>& seq, size_t level_len, size_t erase_pos,
+    size_t insert_pos)
 {
     int    val = seq[erase_pos];
-    size_t half = level_len / 2;
     size_t total_half = seq.size() / 2;
 
     seq.erase(seq.begin() + erase_pos);
     seq.insert(seq.begin() + insert_pos, val);
-    for (size_t intvl = total_half; intvl > half; intvl /= 2) {
-        val = seq[erase_pos + intvl];
-        seq.erase(seq.begin() + erase_pos + intvl);
-        seq.insert(seq.begin() + insert_pos + intvl, val);
+    for (size_t start = total_half; start > erase_pos; start /= 2) {
+        val = seq[start + erase_pos];
+        dequeEraseInsertElem(seq, level_len, start + erase_pos, start + insert_pos);
     }
 }
 

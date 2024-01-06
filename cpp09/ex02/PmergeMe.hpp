@@ -41,6 +41,7 @@ private:
     static void dequeSort(std::deque<int>& seq, size_t len);
     static void printResult();
     // vector sort
+    static void vectorSwap(std::vector<int>& seq, size_t idx1, size_t idx2);
     static void vectorComparePairs(std::vector<int>& seq, size_t len);
     static void vectorEraseInsertElem(
         std::vector<int>& seq, size_t level_len, size_t erase_pos,
@@ -49,6 +50,7 @@ private:
         std::vector<int>& seq, size_t level_len, size_t sorted_len, size_t idx);
     static void vectorBinaryInsert(std::vector<int>& seq, size_t level_len);
     // deque ssort
+    static void dequeSwap(std::deque<int>& seq, size_t idx1, size_t idx2);
     static void dequeComparePairs(std::deque<int>& seq, size_t len);
     static void dequeEraseInsertElem(
         std::deque<int>& seq, size_t level_len, size_t erase_pos,
