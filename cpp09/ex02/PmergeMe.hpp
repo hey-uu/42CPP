@@ -49,7 +49,7 @@ private:
     static void vectorBinaryInsertElem(
         std::vector<int>& seq, size_t level_len, size_t sorted_len, size_t idx);
     static void vectorBinaryInsert(std::vector<int>& seq, size_t level_len);
-    // deque ssort
+    // deque sort
     static void dequeSwap(std::deque<int>& seq, size_t idx1, size_t idx2);
     static void dequeComparePairs(std::deque<int>& seq, size_t len);
     static void dequeEraseInsertElem(
