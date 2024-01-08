@@ -40,7 +40,7 @@ std::string PmergeMe::vectorToStr(std::vector<int> const& vector)
 
     for (std::vector<int>::const_iterator it = vector.begin();
          it != vector.end(); it++) {
-        assert(it == vector.begin() || prev < *it);
+        assert(it == vector.begin() || prev <= *it);
         str += intToStr(*it);
         str += " ";
     }
@@ -57,11 +57,13 @@ void PmergeMe::parseInput(std::string const& input)
     _deque.clear();
     while (iss >> num) {
         _input += intToStr(num) + " ";
+        if (num < 0)
+            throw std::runtime_error("Negative Number");
         _vector.push_back(num);
         _deque.push_back(num);
     }
     if (!(iss.eof()))
-        throw std::runtime_error("Invalid input");
+        throw std::runtime_error("Invalid Format");
 }
 
 template <typename Container>
