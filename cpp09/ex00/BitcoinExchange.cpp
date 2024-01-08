@@ -67,13 +67,13 @@ bool BitcoinExchange::isValidDate(int date[3])
 
     if (date[0] < 2009 || date[0] > t->tm_year + 1900)
         return false;
-    if (date[0] == t->tm_year + 100) {
+    if (date[0] == t->tm_year + 1900) {
         if (date[1] > t->tm_mon + 1)
             return false;
         if (date[1] == t->tm_mon + 1 && date[2] > t->tm_mday)
             return false;
     }
-    if (date[1] < 0 || date[1] > 12)
+    if (date[1] <= 0 || date[1] > 12)
         return false;
     if (!isLeapYear(date[0]) || date[1] != 2) {
         if (date[2] > days_in_month[date[1] - 1])
@@ -87,13 +87,15 @@ bool BitcoinExchange::isValidPrice(BitcoinData& data)
 {
     std::map<std::string, double>::const_iterator it
         = _rates.lower_bound(data.date_str);
+
     if (it == _rates.begin())
         return false;
-    if (it->first > data.date_str)
+    if (it == _rates.end() || it->first > data.date_str)
         it--;
     if (it == _rates.begin() && it->first > data.date_str)
         return false;
-    data.price = data.amount * it->second;
+    std::cout << data.amount << " * " << it->second << std::endl;
+    data.price = static_cast<double>(data.amount) * it->second;
     return true;
 }
 
