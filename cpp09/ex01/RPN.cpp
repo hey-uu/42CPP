@@ -3,6 +3,21 @@
 
 std::stack<int> RPN::operands;
 
+RPN::RPN() {}
+
+RPN::RPN(const RPN& other)
+{
+    (void)other;
+}
+
+RPN& RPN::operator=(const RPN& other)
+{
+    (void)other;
+    return *this;
+}
+
+RPN::~RPN() {}
+
 void RPN::calculate(char c)
 {
     if (operands.size() < 2)
