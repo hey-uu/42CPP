@@ -34,6 +34,6 @@ re:
 	make all
 test:
 	make
-	./$(NAME) &> out.txt
+	./$(NAME) ./data/input.txt &> out.txt
 
 .PHONY: all clean fclean re bonus test
