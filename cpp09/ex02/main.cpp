@@ -1,14 +1,29 @@
 #include "PmergeMe.hpp"
 
-static std::string parseInput(int argc, char* argv[])
+static std::string concatenateInput(int argc, char* argv[])
 {
-    std::string input;
-
+    std::string res;
     for (int i = 0; i < argc; i++) {
-        input += argv[i];
-        input += " ";
+        res += argv[i];
+        res += " ";
     }
-    return input;
+    return res;
+}
+
+static std::string checkInput(std::string const& input)
+{
+    std::istringstream iss(input);
+    std::string        res = "";
+    int                num;
+    while (iss >> num) {
+        res += intToStr(num) + " ";
+        if (num < 0)
+            throw std::runtime_error("Negative Number");
+    }
+    if (!(iss.eof()))
+        throw std::runtime_error("Invalid Format");
+
+    return res;
 }
 
 int main(int argc, char** argv)
@@ -17,9 +32,10 @@ int main(int argc, char** argv)
         std::cout << "Need input" << std::endl;
         return 1;
     }
-    std::string input = parseInput(argc - 1, argv + 1);
+    std::string input = concatenateInput(argc - 1, argv + 1);
     try {
-        PmergeMe::sort(input);
+        std::string checkedInput = checkInput(input);
+        PmergeMe::sort(checkedInput);
     } catch (std::exception const& e) {
         std::cout << "Error: " << e.what() << std::endl;
         return 1;

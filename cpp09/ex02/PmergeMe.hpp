@@ -1,8 +1,11 @@
 #ifndef PMERGE_ME_HPP
 #define PMERGE_ME_HPP
 
+#include "utils.hpp"
 #include <deque>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 class PmergeMe
@@ -19,40 +22,26 @@ private:
     PmergeMe& operator=(PmergeMe const& other);
     ~PmergeMe();
 
-    // utils
-    static std::string intToStr(int num);
-    static std::string vectorToStr(std::vector<int> const& vector);
-    // static std::string dequeToStr(std::deque<int> const& vector);
-    static size_t      jacobisthalNumber(size_t n);
-
-    template <typename Container>
-    struct Func
-    {
-        typedef void (*sort)(Container& seq, size_t len);
-    };
-
-    template <typename Container>
-    static void measureRunTime(
-        typename Func<Container>::sort fct, Container& seq, double& time);
-
-    // main flow
-    static void parseInput(std::string const& input);
-    static void vectorSort(std::vector<int>& seq, size_t len);
-    static void dequeSort(std::deque<int>& seq, size_t len);
     static void printResult();
     // vector sort
+    static void measureVectorSortTime(std::string const& input);
+    static void pushVectorInput(std::string const& input);
+    static void vectorSort(std::vector<int>& seq, size_t len);
     static void vectorSwap(std::vector<int>& seq, size_t idx1, size_t idx2);
     static void vectorComparePairs(std::vector<int>& seq, size_t len);
-    static void vectorEraseInsertElem(
+    static void vectorMoveElem(
         std::vector<int>& seq, size_t level_len, size_t erase_pos,
         size_t insert_pos);
     static void vectorBinaryInsertElem(
         std::vector<int>& seq, size_t level_len, size_t sorted_len, size_t idx);
     static void vectorBinaryInsert(std::vector<int>& seq, size_t level_len);
     // deque sort
+    static void measureDequeSortTime(std::string const& input);
+    static void pushDequeInput(std::string const& input);
+    static void dequeSort(std::deque<int>& seq, size_t len);
     static void dequeSwap(std::deque<int>& seq, size_t idx1, size_t idx2);
     static void dequeComparePairs(std::deque<int>& seq, size_t len);
-    static void dequeEraseInsertElem(
+    static void dequeMoveElem(
         std::deque<int>& seq, size_t level_len, size_t erase_pos,
         size_t insert_pos);
     static void dequeBinaryInsertElem(

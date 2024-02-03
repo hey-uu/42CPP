@@ -12,7 +12,7 @@ CXXFLAGS						+=	$(CXXFLAGS_SANITIZE)
 endif
 
 # FILES
-SRCS							=	main.cpp PmergeMe.cpp PmergeMeSort.cpp
+SRCS							=	main.cpp PmergeMe.cpp PmergeMeDequeSort.cpp PmergeMeVectorSort.cpp utils.cpp
 OBJS							=	$(SRCS:.cpp=.o)
 
 # BUILD
@@ -34,6 +34,6 @@ re:
 	make all
 test:
 	make
-	./$(NAME) &> out.txt
+	./${NAME} `jot -r 3000 1 100000 | tr '\n' ' '` > out.txt
 
 .PHONY: all clean fclean re bonus test
