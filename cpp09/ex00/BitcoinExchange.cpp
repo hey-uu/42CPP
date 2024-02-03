@@ -88,13 +88,12 @@ bool BitcoinExchange::isValidPrice(BitcoinData& data)
     std::map<std::string, double>::const_iterator it
         = _rates.lower_bound(data.date_str);
 
-    if (it == _rates.begin())
+    if (it == _rates.begin() && it->first > data.date_str)
         return false;
     if (it == _rates.end() || it->first > data.date_str)
         it--;
     if (it == _rates.begin() && it->first > data.date_str)
         return false;
-    std::cout << data.amount << " * " << it->second << std::endl;
     data.price = static_cast<double>(data.amount) * it->second;
     return true;
 }
